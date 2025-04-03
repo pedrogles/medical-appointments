@@ -1,0 +1,40 @@
+@use '../../../styles/variables' as v;
+
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.3rem;
+        width: 100%;
+        max-width: 25rem;
+        padding: 0 1rem;
+        .logo {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 1rem;
+        }
+        .title {
+            font-size: v.$text-3xl;
+            text-align: center;
+        }
+        .form-field {
+            width: 100%;
+        }
+        .btn-submit {
+            background-color: #000000;
+            border-radius: .3rem;
+            width: 100%;
+            font-size: v.$text-base;
+            height: 3rem;
+        }
+        .btn-submit:disabled {
+            background-color: #4e4e4e;
+            color: #f1f1f1;
+        }
+    } 
+}

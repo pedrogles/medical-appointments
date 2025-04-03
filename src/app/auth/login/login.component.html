@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
+    <img 
+        class="logo"
+        src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/minimalist-logo-design-template-14a896a85314edc46b63984df2844503_screen.jpg?ts=1573303454" 
+        alt=""
+    >
+    <h1 class="title">Sign Up</h1>
+    <div>
+        <mat-form-field class="form-field">
+            <mat-label>Usuário</mat-label>
+            <input matInput formControlName="user" placeholder="Digite seu usuário...">
+        </mat-form-field>
+    
+        <mat-form-field class="form-field">
+            <mat-label>Senha</mat-label>
+            <input matInput formControlName="password" placeholder="Digite sua senha...">
+        </mat-form-field>
+
+        <button mat-flat-button type="submit" class="btn-submit" [disabled]="loginForm.invalid">
+            Entrar
+        </button>
+    </div>
+</form>
