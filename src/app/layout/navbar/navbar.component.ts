@@ -3,6 +3,7 @@ import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { MatIconModule } from '@angular/material/icon';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { RouterModule } from '@angular/router';
+import { IMenuItem, menuItems } from '../../core/models/menu.model';
 
 @Component({
   selector: 'app-navbar',
@@ -30,12 +31,7 @@ import { RouterModule } from '@angular/router';
 export class NavbarComponent {
   isMenu: boolean = false;
 
-  menuItems = [
-    { label: 'Agendamento de Consulta', route: '/' },
-    { label: 'Cadastro de Paciente', route: '/' },
-    { label: 'Lista de Pacientes', route: '/' },
-    { label: 'Lista de Consultas', route: '/' }
-  ];
+  menuItems: IMenuItem[] = menuItems;
 
   onChangeMenuState(): void {
     this.isMenu = !this.isMenu;
