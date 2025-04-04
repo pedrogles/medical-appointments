@@ -1,0 +1,36 @@
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    width: 100%;
+    padding: 0 1rem;
+    background-color: var(--primary-dark);
+    .menu-btn, .close-btn {
+        display: flex;
+        align-items: center;
+        color: var(--text-terciary);
+        font-size: 2rem;
+        width: 2rem;
+    }
+    .menu {
+        position: absolute;
+        left: 0;
+        background-color: var(--primary-dark);
+        width: 100vw;
+        z-index: -1;
+        transform: translateY(-63%);
+        .menu-list {
+            padding: .5rem 0 1rem 0;
+            .menu-item {
+                padding: 1rem;
+                .link {
+                    display: block;
+                    color: var(--text-terciary);
+                    font-size: var(--text-base);
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
