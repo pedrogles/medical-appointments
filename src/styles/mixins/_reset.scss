@@ -26,6 +26,8 @@
       font-family: system-ui, -apple-system, sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeSpeed;
+      background-color: var(--bg-default);
+      color: var(--text-primary);
     }
   
     // Elementos de mídia responsivos

@@ -1,5 +1,3 @@
-@use '../../../styles/variables' as v;
-
 :host {
     display: flex;
     justify-content: center;
@@ -19,22 +17,26 @@
             border-radius: 1rem;
         }
         .title {
-            font-size: v.$text-3xl;
+            font-size: var(--text-3xl);
             text-align: center;
+            color: var(--text-primary);
         }
         .form-field {
             width: 100%;
         }
         .btn-submit {
-            background-color: #000000;
+            background-color: var(--primary);
             border-radius: .3rem;
             width: 100%;
-            font-size: v.$text-base;
+            font-size: var(--text-base);
             height: 3rem;
         }
         .btn-submit:disabled {
-            background-color: #4e4e4e;
-            color: #f1f1f1;
+            background-color: var(--btn-disabled-bg);
+            color: var(--btn-disabled-text);
+        }
+        .btn-submit:hover {
+            background-color: var( --primary-hover);
         }
     } 
 }
