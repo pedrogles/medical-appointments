@@ -8,5 +8,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './logo.component.scss'
 })
 export class LogoComponent {
-  size = input<string>('sm-logo');
+  class = input<string>('sm-logo blue');
 }
