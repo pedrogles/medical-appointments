@@ -21,7 +21,7 @@ import { MatDividerModule } from '@angular/material/divider';
       ),
       state("close", 
         style({
-          top: '-16rem'
+          top: '-25rem'
         })
       ),
       transition('open => close', [animate('1s ease-in')]),
