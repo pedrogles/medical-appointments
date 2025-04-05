@@ -5,8 +5,8 @@ export interface IMenuItem {
 }
 
 export const menuItems: IMenuItem[] = [
-    { label: 'Agendamento de Consulta', route: '/' },
-    { label: 'Cadastro de Paciente', route: '/' },
-    { label: 'Lista de Pacientes', route: '/' },
-    { label: 'Lista de Consultas', route: '/' }
+    { label: 'Dashboard', route: '/', icon: 'home' },
+    { label: 'Cadastro de Paciente', route: '/', icon: 'person_add' },
+    { label: 'Agendamento de Consulta', route: '/', icon: 'add_circle' },
+    { label: 'Gerenciar Pacientes/Consultas', route: '/', icon: 'list'}
 ]
