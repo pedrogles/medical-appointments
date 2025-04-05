@@ -1,5 +1,5 @@
 <header id="navbar">
-    <app-logo class="sm-logo white"></app-logo>
+    <app-logo class="xs-logo white"></app-logo>
     @if(isMenu) {
         <mat-icon 
             class="close-btn" 
@@ -8,8 +8,7 @@
             fontIcon="close" 
             (click)="onChangeMenuState()">
         </mat-icon>
-    }
-    @else {
+    } @else {
         <mat-icon 
             class="menu-btn" 
             aria-hidden="false" 
@@ -20,13 +19,19 @@
     }
     <nav class="menu" [@openClose]="isMenu ? 'open' : 'close'">
         <ul class="menu-list">
-            @for(item of menuItems; track item) {
-                <li class="menu-item">
-                    <a class="link" [routerLink]="item.route">
+            @for(item of menuItems; track item.route) {
+                <li>
+                    <a class="menu-item" [routerLink]="item.route">
+                        <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
                         {{item.label}}
                     </a>
                 </li>
             }
+            <mat-divider></mat-divider>
         </ul>
+        <button class="logout-btn" routerLink="/login">
+            <mat-icon aria-hidden="false" aria-label="Botão sair" fontIcon="logout"></mat-icon>
+            Logout
+        </button>
     </nav>
 </header>

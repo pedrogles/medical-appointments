@@ -15,22 +15,31 @@
     }
     .menu {
         position: absolute;
+        top: -16rem;
         left: 0;
         background-color: var(--primary-dark);
         width: 100vw;
         z-index: -1;
-        transform: translateY(-63%);
         .menu-list {
-            padding: .5rem 0 1rem 0;
+            padding: 0 0 1rem 0;
             .menu-item {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                font-size: var(--text-base);
+                color: var(--text-terciary);
+                width: 100%;
                 padding: 1rem;
-                .link {
-                    display: block;
-                    color: var(--text-terciary);
-                    font-size: var(--text-base);
-                    width: 100%;
-                }
             }
+        }
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: var(--text-base);
+            color: var(--text-terciary);
+            width: 100%;
+            padding: 1rem;
         }
     }
 }

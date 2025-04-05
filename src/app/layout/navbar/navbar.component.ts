@@ -4,23 +4,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { RouterModule } from '@angular/router';
 import { IMenuItem, menuItems } from '../../core/models/menu.model';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [LogoComponent, MatIconModule, RouterModule],
+  imports: [LogoComponent, MatIconModule, RouterModule, MatDividerModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   animations: [
     trigger("openClose", [
       state("open", 
         style({
-          transform: 'translateY(62%)',
+          top: '4rem'
         })
       ),
       state("close", 
         style({
-          transform: 'translateY(-63%)',
+          top: '-16rem'
         })
       ),
       transition('open => close', [animate('1s ease-in')]),
