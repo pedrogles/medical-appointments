@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, input, OnDestroy, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -12,6 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './page-layout.component.scss'
 })
 export class PageLayoutComponent implements OnInit, OnDestroy{
+  title = input.required<string>();
   isMobile!: boolean;
   breakpointObserver = inject(BreakpointObserver);
 
