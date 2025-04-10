@@ -19,7 +19,7 @@
     }
     <nav class="menu" [@openClose]="isMenu ? 'open' : 'close'">
         <ul class="menu-list">
-            @for(item of menuItems; track item.route) {
+            @for(item of menuItems; track item.id) {
                 <li>
                     <a class="menu-item" [routerLink]="item.route">
                         <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
