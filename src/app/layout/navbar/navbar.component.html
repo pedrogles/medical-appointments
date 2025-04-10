@@ -17,21 +17,21 @@
             (click)="onChangeMenuState()">
         </mat-icon>
     }
-    <nav class="menu" [@openClose]="isMenu ? 'open' : 'close'">
-        <ul class="menu-list">
-            @for(item of menuItems; track item.id) {
-                <li>
-                    <a class="menu-item" [routerLink]="item.route">
-                        <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
-                        {{item.label}}
-                    </a>
-                </li>
-            }
-            <mat-divider></mat-divider>
-        </ul>
-        <button class="logout-btn" routerLink="/login">
-            <mat-icon aria-hidden="false" aria-label="Botão sair" fontIcon="logout"></mat-icon>
-            Logout
-        </button>
-    </nav>
 </header>
+<nav class="menu" [@openClose]="isMenu ? 'open' : 'close'">
+    <ul class="menu-list">
+        @for(item of menuItems; track item.id) {
+            <li>
+                <a class="menu-item" [routerLink]="item.route">
+                    <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
+                    {{item.label}}
+                </a>
+            </li>
+        }
+        <mat-divider></mat-divider>
+    </ul>
+    <button class="logout-btn" routerLink="/login">
+        <mat-icon aria-hidden="false" aria-label="Botão sair" fontIcon="logout"></mat-icon>
+        Logout
+    </button>
+</nav>
