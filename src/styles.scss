@@ -1,0 +1,4 @@
+@use './styles/mixins/reset' as reset;
+@use './styles/variables';
+
+@include reset.reset-css;
