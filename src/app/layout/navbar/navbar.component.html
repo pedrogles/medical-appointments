@@ -20,6 +20,7 @@
 </header>
 <nav class="menu" [@openClose]="isMenu ? 'open' : 'close'">
     <ul class="menu-list">
+        <mat-divider></mat-divider>
         @for(item of menuItems; track item.id) {
             <li>
                 <a class="menu-item" [routerLink]="item.route">
