@@ -5,7 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
-import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth/auth.service';
+import { IUser } from '../../core/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -24,18 +25,18 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   formBuilder: FormBuilder = inject(FormBuilder);
-  router: Router = inject(Router);
+  authService: AuthService = inject(AuthService);
   passwordPattern: RegExp = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
 
   loginForm = this.formBuilder.group({
-    user: [null, [Validators.required, Validators.minLength(4)]],
-    password: [null, [Validators.required, Validators.pattern(this.passwordPattern)]]
+    username: ['', [Validators.required, Validators.minLength(4)]],
+    password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]]
   })
 
   onSubmit(): void {
     if(this.loginForm.valid) {
-      // console.log(this.loginForm.value)
-      this.router.navigate(['/dashboard'])
+      const user = this.loginForm.value as IUser;
+      this.authService.login(user);
     }    
   }
 }
