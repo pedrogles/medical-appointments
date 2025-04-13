@@ -12,4 +12,8 @@ export class AuthService {
     // console.log(user);
     this.router.navigate(['dashboard']);
   }
+
+  logout() {
+    this.router.navigate(['login']);
+  }
 }
