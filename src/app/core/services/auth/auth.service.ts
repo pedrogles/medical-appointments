@@ -9,11 +9,16 @@ export class AuthService {
   router: Router = inject(Router);
 
   login(user: IUser): void {
-    // console.log(user);
+    console.log(user);
     this.router.navigate(['dashboard']);
   }
 
-  logout() {
+  register(user: IUser): void {
+    console.log(user);
+    this.router.navigate(['login']);
+  }
+
+  logout(): void {
     this.router.navigate(['login']);
   }
 }
