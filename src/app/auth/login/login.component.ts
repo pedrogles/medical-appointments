@@ -4,9 +4,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { IUser } from '../../core/models/user.model';
+import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout/auth-layout.component';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ import { IUser } from '../../core/models/user.model';
     MatCardModule, 
     MatButtonModule, 
     ReactiveFormsModule,
-    LogoComponent
+    AuthLayoutComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -35,7 +35,8 @@ export class LoginComponent {
 
   onSubmit(): void {
     if(this.loginForm.valid) {
-      const user = this.loginForm.value as IUser;
+      const { username, password } = this.loginForm.value;
+      const user = { username: username, password: password } as IUser;
       this.authService.login(user);
     }    
   }

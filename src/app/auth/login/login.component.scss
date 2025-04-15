@@ -1,42 +1,26 @@
-:host {
+.login-form {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
-    .login-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.3rem;
+    gap: 1.3rem;
+    width: 100%;
+    max-width: 25rem;
+    padding: 1rem;  
+    .form-field {
         width: 100%;
-        max-width: 25rem;
-        padding: 0 1rem;
-        .logo {
-            width: 5rem;
-            height: 5rem;
-            border-radius: 1rem;
-        }
-        .title {
-            font-size: var(--text-3xl);
-            text-align: center;
-            color: var(--text-primary);
-        }
-        .form-field {
-            width: 100%;
-        }
-        .btn-submit {
-            background-color: var(--primary);
-            border-radius: .3rem;
-            width: 100%;
-            font-size: var(--text-base);
-            height: 3rem;
-        }
-        .btn-submit:disabled {
-            background-color: var(--btn-disabled-bg);
-            color: var(--btn-disabled-text);
-        }
-        .btn-submit:hover {
-            background-color: var( --primary-hover);
-        }
-    } 
-}
+    }
+    .btn-submit {
+        background-color: var(--primary);
+        border-radius: .3rem;
+        width: 100%;
+        font-size: var(--text-base);
+        height: 3rem;
+    }
+    .btn-submit:disabled {
+        background-color: var(--btn-disabled-bg);
+        color: var(--btn-disabled-text);
+    }
+    .btn-submit:hover {
+        background-color: var( --primary-hover);
+    }
+} 

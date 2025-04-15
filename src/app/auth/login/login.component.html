@@ -1,7 +1,5 @@
-<form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
-    <app-logo class="md-logo blue"></app-logo>
-    <h1 class="title">Sign Up</h1>
-    <div>
+<app-auth-layout title="Sign In">
+    <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
         <mat-form-field class="form-field">
             <mat-label>Usuário</mat-label>
             <input matInput formControlName="username" placeholder="Digite seu usuário...">
@@ -11,9 +9,9 @@
             <mat-label>Senha</mat-label>
             <input matInput formControlName="password" placeholder="Digite sua senha..." type="password">
         </mat-form-field>
-
+    
         <button mat-flat-button type="submit" class="btn-submit" [disabled]="loginForm.invalid">
             Entrar
         </button>
-    </div>
-</form>
+    </form>
+</app-auth-layout>
