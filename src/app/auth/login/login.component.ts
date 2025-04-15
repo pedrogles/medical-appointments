@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +14,6 @@ import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout/auth-l
     FormsModule, 
     MatFormFieldModule, 
     MatInputModule, 
-    MatCardModule, 
     MatButtonModule, 
     ReactiveFormsModule,
     AuthLayoutComponent
