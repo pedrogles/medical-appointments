@@ -23,4 +23,20 @@
     .btn-submit:hover {
         background-color: var( --primary-hover);
     }
+
+    .register-redirect {
+        display: flex;
+        flex-direction: column;
+        .texts {
+            font-size: var(--text-base);
+            color: var(--text-primary);
+            text-align: center;
+        }
+        .texts:last-child {
+            font-size: var(--text-sm);
+            color: var(--primary);
+            text-decoration: underline;
+            text-align: center;
+        }
+    }
 } 

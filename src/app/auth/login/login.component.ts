@@ -6,6 +6,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { AuthService } from '../../core/services/auth/auth.service';
 import { IUser } from '../../core/models/user.model';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout/auth-layout.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout/auth-l
     MatInputModule, 
     MatButtonModule, 
     ReactiveFormsModule,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
