@@ -7,6 +7,27 @@
       padding: 0;
       box-sizing: border-box;
     }
+
+    // Scroll bar Firefox
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #6b7280 #d1d5db;
+    }
+
+    // Scroll bar  Chrome, Edge, and Safari
+    *::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: #d1d5db;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: #6b7280;
+      border-radius: 20px;
+      border: 3px solid #d1d5db;
+    }
   
     // Remover estilos padrão de listas
     ul,
