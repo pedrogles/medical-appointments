@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { IUser } from '../../core/models/user.model';
-import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { RouterLink } from '@angular/router';
 
 @Component({

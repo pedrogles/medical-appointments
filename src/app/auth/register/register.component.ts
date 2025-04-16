@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IUser } from '../../core/models/user.model';

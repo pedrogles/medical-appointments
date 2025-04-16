@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { LogoComponent } from '../../../shared/components/logo/logo.component';
+import { LogoComponent } from '../../shared/components/logo/logo.component';
 
 @Component({
   selector: 'app-auth-layout',
