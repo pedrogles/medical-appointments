@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth/auth.service';
-import { IUser } from '../../core/models/user.model';
+import { IUser } from '../../core/interfaces/user.interface';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { RouterLink } from '@angular/router';
 
@@ -36,7 +36,7 @@ export class LoginComponent {
   onSubmit(): void {
     if(this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      const user = { username: username, password: password } as IUser;
+      const user = { username, password } as IUser;
       this.authService.login(user);
     }    
   }
