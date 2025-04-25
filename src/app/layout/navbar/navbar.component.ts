@@ -3,9 +3,10 @@ import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { MatIconModule } from '@angular/material/icon';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { RouterModule } from '@angular/router';
-import { IMenuItem, menuItems } from '../../core/models/menu.model';
 import { MatDividerModule } from '@angular/material/divider';
 import { AuthService } from '../../core/services/auth/auth.service';
+import { IMenuItem } from '../../core/interfaces/menu.interface';
+import { menuItems } from '../../core/constants/menu.constant';
 
 @Component({
   selector: 'app-navbar',
