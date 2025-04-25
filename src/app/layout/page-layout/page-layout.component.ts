@@ -12,22 +12,23 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './page-layout.component.scss'
 })
 export class PageLayoutComponent implements OnInit, OnDestroy{
+  private destroy$ = new Subject<void>();
+
   title = input.required<string>();
   isMobile!: boolean;
+  
   breakpointObserver = inject(BreakpointObserver);
-
-  onDestroy$ = new Subject<void>();
 
   ngOnInit(): void {
     this.breakpointObserver.observe(['(max-width: 1023px)'])
-      .pipe(takeUntil(this.onDestroy$))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
         this.isMobile = value.matches;
       })
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
