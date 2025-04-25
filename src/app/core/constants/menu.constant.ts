@@ -1,9 +1,4 @@
-export interface IMenuItem {
-    id: number;
-    label: string;
-    route: string;
-    icon?: string;
-}
+import { IMenuItem } from "../interfaces/menu.interface";
 
 export const menuItems: IMenuItem[] = [
     { id: 0, label: 'Dashboard', route: '/', icon: 'home' },
