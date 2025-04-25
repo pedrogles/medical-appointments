@@ -8,7 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { IUser } from '../../core/models/user.model';
+import { IUser } from '../../core/interfaces/user.interface';
+import { passwordMatchValidator } from '../../shared/validators/passwordMatch.validator';
 
 @Component({
   selector: 'app-register',
@@ -37,29 +38,14 @@ export class RegisterComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
     confirmPassword: ['', [Validators.required, Validators.pattern(this.passwordPattern)]]
-  }, { validators: this.passwordMatchValidator('password', 'confirmPassword') });
+  }, { validators: passwordMatchValidator('password', 'confirmPassword') });
 
   onSubmit(): void {
     if(this.registerForm.valid) {
       const { username, email, password } = this.registerForm.value;
-      const user = { username: username, email: email, password: password } as IUser;
+      const user = { username, email, password } as IUser;
       this.authService.register(user);
     }    
-  }
-
-  passwordMatchValidator(passwordKey: string, confirmPasswordKey: string): ValidatorFn {
-    return (formGroup: AbstractControl): ValidationErrors | null => {
-      const password = formGroup.get(passwordKey)?.value;
-      const confirmPassword = formGroup.get(confirmPasswordKey)?.value;
-
-      if(password !== confirmPassword) {
-        formGroup.get(confirmPasswordKey)?.setErrors({ passwordMismatch: true });
-        return { passwordMismatch: true };
-      } else {
-        formGroup.get(confirmPasswordKey)?.setErrors(null);
-        return null;
-      }
-    }
   }
 
   get formControls() {
