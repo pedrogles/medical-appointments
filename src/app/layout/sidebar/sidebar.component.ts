@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
-import { IMenuItem, menuItems } from '../../core/models/menu.model';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../core/services/auth/auth.service';
+import { IMenuItem } from '../../core/interfaces/menu.interface';
+import { menuItems } from '../../core/constants/menu.constant';
 
 @Component({
   selector: 'app-sidebar',
