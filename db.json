@@ -1,0 +1,71 @@
+{
+  "appointments": [
+    {
+      "id": "1027",
+      "specialty": "Clínico Geral",
+      "date": 20250618,
+      "hour": "16:00",
+      "patient": "Gael Augusto Ribeiro",
+      "professional": "Dr. João Silva",
+      "status": "agendado",
+      "observations": ""
+    },
+    {
+      "id": "1028",
+      "specialty": "Clínico Geral",
+      "date": 20250626,
+      "hour": "09:00",
+      "patient": "Alice Carolina Isabelly Nunes",
+      "professional": "Dr. João Silva",
+      "status": "agendado",
+      "observations": ""
+    }
+  ],
+  "patients": [
+    {
+      "id": "212c",
+      "name": "Alice Carolina Isabelly Nunes",
+      "birth": "2001-03-20",
+      "cpf": "83246744467",
+      "rg": "374322557",
+      "sex": "F",
+      "phone": "82996796536",
+      "email": "alice-nunes93@steadyoffice.com.br",
+      "address": {
+        "number": 21,
+        "zipCode": "57420970",
+        "street": "Rua Padre Daniel Bezerra",
+        "district": "Centro",
+        "city": "Batalha",
+        "state": "Alagoas"
+      }
+    },
+    {
+      "id": "4166",
+      "name": "Gael Augusto Ribeiro",
+      "birth": "2006-04-11",
+      "cpf": "98602854382",
+      "rg": "294985335",
+      "sex": "M",
+      "phone": "85995961338",
+      "email": "gael_ribeiro@marcossousa.com",
+      "address": {
+        "number": 85,
+        "zipCode": "62602974",
+        "street": "Rua Principal",
+        "district": "Aguaí",
+        "city": "Itapajé",
+        "state": "Ceará"
+      }
+    }
+  ],
+  "professionals": [
+    {
+      "id": "p001",
+      "name": "Dr. João Silva",
+      "specialty": "Clínico Geral",
+      "phone": "83991234567",
+      "email": "joao.silva@clinicaexemplo.com"
+    }
+  ]
+}
