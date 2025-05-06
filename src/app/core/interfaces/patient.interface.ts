@@ -1,5 +1,5 @@
 export interface IPatient {
-    id: string;
+    readonly id: string;
     name: string;
     birth: string;
     cpf: string;
@@ -13,11 +13,6 @@ export interface IPatient {
         district: string;
         city: string;
         state: string;
-        cep: string;
-    },
-    healthPlan: {
-        name: string;
-        code: string;
-    },
-    observations: string;
+        zipCode: string;
+    }
 }
