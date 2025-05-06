@@ -1,0 +1,13 @@
+.cards {
+    display: flex;
+    gap: .5rem;
+    overflow-y: hidden;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; 
+    padding-bottom: 1rem;
+    
+    @media (min-width: 686px) {
+        padding-bottom: 0;
+    }
+}

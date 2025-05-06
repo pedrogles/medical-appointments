@@ -1,0 +1,7 @@
+<mat-icon class="icon" aria-hidden="true" [fontIcon]="icon()" [ngStyle]="{ color: iconColor() }"></mat-icon>
+@if(isLoading()) {
+    <app-spinner></app-spinner>
+} @else {
+    <p class="count">{{ count() }}</p>
+}
+<h4 class="title">{{ title() }}</h4>

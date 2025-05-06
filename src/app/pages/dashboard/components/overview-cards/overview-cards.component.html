@@ -1,0 +1,11 @@
+<section class="cards">
+    @for(card of cards; track card.id) {
+        <app-overview-card 
+            [title]="card.title"  
+            [count]="card.count" 
+            [icon]="card.icon" 
+            [iconColor]="card.iconColor"
+            [isLoading]="isLoading">
+        </app-overview-card>
+    }
+</section>
