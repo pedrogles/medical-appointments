@@ -1,0 +1,44 @@
+<h2 class="title">Agenda do dia</h2>
+<section>
+    <article>
+        <ul class="list">
+            @if(isLoading.patients) {
+                <app-spinner></app-spinner>
+            } @else {
+                @for(appointment of appointments; track appointment.id) {
+                    <li>
+                        <app-agenda-item 
+                            [patientName]="appointment.patient ?? 'Erro de carregamento...'" 
+                            [hour]="appointment.hour ?? '--:--'">
+                        </app-agenda-item>
+                    </li>
+                } @empty {
+                    <li>
+                        <p class="empty-list">Nenhuma consulta agendada para hoje.</p>
+                    </li>
+                }
+            }  
+        </ul>
+    </article>
+    <article>
+        <div class="chart">
+            <h3 class="title">Próxima consulta</h3>
+            @if(isLoading.nextAppointment) {
+                <app-spinner></app-spinner>
+            } 
+            @if(appointments.length >= 0) {
+                <p class="hour">{{ nextAppointment }}</p>
+            }
+            <h4 class="subtitle">Consultas mensais</h4>
+            @if(isLoading.chartData) {
+                <app-spinner></app-spinner>
+            } 
+            <canvas
+                baseChart
+                [data]="lineChartData"
+                [options]="lineChartOptions"
+                [type]="lineChartType"
+            ></canvas>
+        </div>
+    </article>
+</section>

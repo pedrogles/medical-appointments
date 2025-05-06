@@ -1,0 +1,79 @@
+:host {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .title {
+        font-size: var(--text-2xl);
+        font-weight: var(--weight-500);
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        article {
+            flex: .5;
+            & .list {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: .5rem;
+                max-height: 420px;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch; 
+                overflow: auto;
+                li {
+                    width: 100%;
+                    .empty-list {
+                        font-size: var(--text-sm);
+                        font-weight: var(--weight-400);
+                        background-color: var(--bg-surface);
+                        border: solid .1rem var(--border-color);
+                        border-radius: .5rem;
+                        padding: 1rem;
+                        box-shadow: 0px 0px 1px 0px rgba(162,162,162,1);
+                        -webkit-box-shadow: 0px 0px 1px 0px rgba(162,162,162,1);
+                        -moz-box-shadow: 0px 0px 1px 0px rgba(162,162,162,1);
+                    }
+                }
+            }
+
+            & .chart {
+                display: flex;
+                flex-direction: column;
+                gap: .3rem;
+                background-color: var(--bg-surface);
+                border: solid .1rem var(--border-color);
+                border-radius: .5rem;
+                padding: 1rem;
+                box-shadow: 0px 0px 1px 0px rgba(162,162,162,1);
+                -webkit-box-shadow: 0px 0px 1px 0px rgba(162,162,162,1);
+                -moz-box-shadow: 0px 0px 1px 0px rgba(162,162,162,1);
+
+                canvas {
+                    max-height: 290px !important;
+                }
+
+                & .title {
+                    font-size: var(--text-xl);
+                    font-weight: var(--weight-400);
+                }
+
+                & .hour {
+                    font-size: var(--text-lg);
+                    font-weight: var(--weight-500);
+                }
+
+                & .subtitle {
+                    font-size: var(--text-base);
+                    font-weight: var(--weight-400);
+                }
+            }
+        }
+
+        @media (min-width: 686px) {
+            flex-direction: row;
+        }
+    }
+}
