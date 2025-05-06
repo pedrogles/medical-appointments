@@ -6,7 +6,7 @@ import { IUser } from '../../interfaces/user.interface';
   providedIn: 'root'
 })
 export class AuthService {
-  router: Router = inject(Router);
+  private readonly router = inject(Router);
 
   login(user: IUser): void {
     console.log(user);
