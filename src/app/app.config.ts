@@ -7,6 +7,10 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { provideHttpClient } from '@angular/common/http';
 import { provideNgxMask } from 'ngx-mask';
 
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { enviroments } from '../enviroments/enviroments';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
@@ -14,6 +18,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(), 
     provideCharts(withDefaultRegisterables()),
     provideHttpClient(),
-    provideNgxMask()
+    provideNgxMask(),
+    provideFirebaseApp(() => initializeApp(enviroments.firebaseConfig)),
+    provideAuth(() => getAuth())
   ]
 };
