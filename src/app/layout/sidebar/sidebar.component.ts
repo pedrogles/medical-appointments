@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from '../../core/services/auth/auth.service';
+import { AuthService } from '../../auth/service/auth.service';
 import { IMenuItem } from '../../core/interfaces/menu.interface';
 import { menuItems } from '../../core/constants/menu.constant';
 
@@ -16,11 +16,19 @@ import { menuItems } from '../../core/constants/menu.constant';
 })
 export class SidebarComponent {
   menuItems: IMenuItem[] = menuItems;
-
-  authService: AuthService = inject(AuthService);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   onLogout(): void {
-    // Adicionar modal de confirmação
-    this.authService.logout();
+    this.authService.logout().subscribe({
+      next: () => {
+        // Adicionar toast de confirmação
+        this.router.navigateByUrl("/login");
+      },
+      error: (error) => {
+        // Adicionar toast de erro
+        console.log(error)
+      }
+    })
   }
 }

@@ -1,8 +1,8 @@
 <app-auth-layout title="Sign In">
     <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
         <mat-form-field class="form-field">
-            <mat-label>Usuário</mat-label>
-            <input matInput formControlName="username" placeholder="Digite seu usuário...">
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="Digite seu email...">
         </mat-form-field>
     
         <mat-form-field class="form-field">

@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth/auth.service';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IUser } from '../../core/interfaces/user.interface';
 import { passwordMatchValidator } from '../../shared/validators/passwordMatch.validator';
@@ -29,9 +29,10 @@ import { passwordMatchValidator } from '../../shared/validators/passwordMatch.va
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  formBuilder: FormBuilder = inject(FormBuilder);
-  authService: AuthService = inject(AuthService);
-  passwordPattern: RegExp = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+  private passwordPattern: RegExp = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   registerForm = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
@@ -44,7 +45,16 @@ export class RegisterComponent {
     if(this.registerForm.valid) {
       const { username, email, password } = this.registerForm.value;
       const user = { username, email, password } as IUser;
-      this.authService.register(user);
+      this.authService.register(user).subscribe({
+        next: () => {
+          // Inserir toast de confirmação de cadastro.
+          this.router.navigateByUrl("/login");
+        },
+        error: (error) => {
+          // Inserir toast de erro.
+          console.log(error)
+        }
+      });
     }    
   }
 

@@ -12,12 +12,11 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './page-layout.component.scss'
 })
 export class PageLayoutComponent implements OnInit, OnDestroy{
-  private destroy$ = new Subject<void>();
-
   title = input.required<string>();
   isMobile!: boolean;
   
-  breakpointObserver = inject(BreakpointObserver);
+  private destroy$ = new Subject<void>();
+  private readonly breakpointObserver = inject(BreakpointObserver);
 
   ngOnInit(): void {
     this.breakpointObserver.observe(['(max-width: 1023px)'])
