@@ -1,5 +1,6 @@
 export const enviroments = {
     baseUrl: "http://localhost:3000",
+    zipCodeUrl: "http://viacep.com.br/ws",
     firebaseConfig: {
         apiKey: "SUA_API_KEY",
         authDomain: "seu-projeto.firebaseapp.com",
