@@ -47,14 +47,13 @@ export class OverviewCardsComponent implements OnInit, OnDestroy{
           2: 'realizedAppointments',
           3: 'canceledAppointments'
         }
-
         this.cards.forEach(card => {
           card.count = data[cardMap[card.id]];
         });
-
         this.isLoading = false;
       },
       error: (error) => {
+        this.isLoading = false;
         console.error("Falha na requisição:", error)
       }
     })
