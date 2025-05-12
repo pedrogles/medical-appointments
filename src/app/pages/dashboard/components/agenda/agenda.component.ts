@@ -25,9 +25,7 @@ export class AgendaComponent implements OnInit, OnDestroy {
   lineChartData!: ChartConfiguration['data'];
   lineChartOptions: ChartConfiguration['options'];
   lineChartType!: ChartType;
-
   checkHour$ = new Subscription();
-
   isLoading = { patients: true, nextAppointment: true, chartData: true };
 
   private readonly dashboardService = inject(DashboardService);
@@ -44,10 +42,11 @@ export class AgendaComponent implements OnInit, OnDestroy {
 
   loadDashboardData(): void {
     this.loadPatientsByDate();
-    this.loadChardData();
+    this.loadChartData();
   }
   
   loadPatientsByDate(): void {
+    // Converte string em formato 00-00-0000 em number 000000
     const date = Number(getDate().replace(/-/g, ""));
     this.dashboardService.getAppointmentsByDate(date)
     .pipe(takeUntil(this.destroy$))
@@ -57,11 +56,14 @@ export class AgendaComponent implements OnInit, OnDestroy {
         this.isLoading.patients = false;
         this.getNextAppointment(appointments);
       },
-      error: (error) => { console.error("Falha na requisição:", error); }
+      error: (error) => {
+        this.isLoading.patients = false
+        console.error("Falha na requisição:", error)
+      }
     })
   }
 
-  loadChardData(): void {
+  loadChartData(): void {
     this.dashboardService.getChartData()
     .pipe(takeUntil(this.destroy$))
     .subscribe({
@@ -70,7 +72,10 @@ export class AgendaComponent implements OnInit, OnDestroy {
         this.initializeChart(data);
         this.isLoading.chartData = false;
       },
-      error: (error) => { console.error("Falha na requisição:", error); }
+      error: (error) => {
+        this.isLoading.chartData = false
+        console.error("Falha na requisição:", error)
+      }
     })
   }
 
@@ -86,7 +91,6 @@ export class AgendaComponent implements OnInit, OnDestroy {
       ],
       labels: chartData.labels
     };
-  
     this.lineChartOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -97,18 +101,12 @@ export class AgendaComponent implements OnInit, OnDestroy {
         y: { ticks: { display: true } }
       }
     };
-  
     this.lineChartType = 'line';
   }
 
   getNextAppointment(appointments: Partial<IAppointment>[]) {
     const appointment = appointments.find((appointment: Partial<IAppointment>) => appointment.hour && appointment.hour >= getHour());
-    if(appointment === undefined) {
-      this.nextAppointment = '--';
-    };
-    if(appointment && appointment.hour) {
-      this.nextAppointment = appointment.hour;
-    };
+    this.nextAppointment = appointment?.hour ?? '--';
     this.isLoading.nextAppointment = false;
   }
   
