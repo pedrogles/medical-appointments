@@ -3,7 +3,7 @@ import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from '../../auth/service/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { IMenuItem } from '../../core/interfaces/menu.interface';
 import { menuItems } from '../../core/constants/menu.constant';
 
@@ -23,7 +23,7 @@ export class SidebarComponent {
     this.authService.logout().subscribe({
       next: () => {
         // Adicionar toast de confirmação
-        this.router.navigateByUrl("/login");
+        this.router.navigate(["auth/login"]);
       },
       error: (error) => {
         // Adicionar toast de erro
