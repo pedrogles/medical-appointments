@@ -30,9 +30,9 @@
                 O campo senha é obrigatório.
             </mat-error>  
             <mat-error *ngIf="formControls.password.errors?.['pattern']">
-                A senha deve conter 8 digitos, pelo menos um caractere especial, um número e uma letra maiúscula.
+                A senha deve ter no mínimo 8 caracteres, incluindo pelo menos uma letra maiúscula e um caractere especial.
               </mat-error>
-            <mat-error *ngIf="formControls.password.errors?.['passwordMismatch']">
+            <mat-error *ngIf="registerForm.errors?.['passwordMismatch']">
                 As senhas não correspondem. Certifique-se de que ambas as senhas são iguais.
             </mat-error>  
         </mat-form-field>
@@ -40,16 +40,17 @@
         <mat-form-field class="form-field">
             <mat-label>Confirmar senha</mat-label>
             <input matInput formControlName="confirmPassword" placeholder="Confirme sua senha..." type="password">
-            <mat-error *ngIf="formControls.confirmPassword.errors?.['passwordMismatch']">
+            <mat-error *ngIf="registerForm.errors?.['passwordMismatch']">
                 As senhas não correspondem. Certifique-se de que ambas as senhas são iguais.
             </mat-error>  
         </mat-form-field>
     
         <button mat-flat-button type="submit" class="btn-submit" [disabled]="registerForm.invalid">
-            Cadastrar
+            @if(loading) { <app-spinner></app-spinner> }   
+            @else { Cadastrar }
         </button>
 
-        <a class="login-redirect" routerLink="/login">
+        <a class="login-redirect" (click)="handleRedirectToLogin()">
             <span class="texts">Já possui uma conta?</span>
             <span class="texts">Faça login aqui.</span>
         </a>
