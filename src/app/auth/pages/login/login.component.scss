@@ -23,7 +23,6 @@
     .btn-submit:hover {
         background-color: var( --primary-hover);
     }
-
     .register-redirect {
         display: flex;
         flex-direction: column;
@@ -37,6 +36,11 @@
             color: var(--primary);
             text-decoration: underline;
             text-align: center;
+            cursor: pointer;
         }
     }
 } 
+
+:host ::ng-deep .mat-mdc-form-field-error-wrapper {
+    padding: 0 !important;
+}
