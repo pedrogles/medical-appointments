@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Router, RouterModule } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
-import { AuthService } from '../../auth/service/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { IMenuItem } from '../../core/interfaces/menu.interface';
 import { menuItems } from '../../core/constants/menu.constant';
 
@@ -38,7 +38,7 @@ export class NavbarComponent {
     this.authService.logout().subscribe({
       next: () => {
         // Adicionar toast de confirmação
-        this.router.navigateByUrl("/login");
+        this.router.navigate(["auth/login"]);
       },
       error: (error) => {
         // Adicionar toast de erro
