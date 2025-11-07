@@ -1,27 +1,93 @@
-# MedicalAppointments
+## 🔐 Login e Cadastro - Angular + Firebase + Angular Material
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+Aplicação de autenticação desenvolvida com Angular, utilizando Firebase Authentication para gerenciamento de usuários.
+A interface foi construída com Angular Material e SCSS, e os formulários utilizam o FormBuilder para criação reativa e validação.
 
-## Development server
+## 🚀 Tecnologias Utilizadas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular v18
+- Firebase Authentication
+- Angular Material
+- SCSS (Sass)
+- Reactive Forms / FormBuilder
+- TypeScript
 
-## Code scaffolding
+## ⚙️ Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Cadastro e login com e-mail e senha
+- Validação reativa de formulários com FormBuilder
+- Feedback visual utilizando Angular Material
+- Redirecionamento após autenticação
+- Mensagens de erro e sucesso
+- Interface responsiva e moderna
 
-## Build
+## 🧩 Estrutura do Projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+src/
+ ├── app/
+ │   ├── core/               # Serviços globais, guards e interceptors
+ │   ├── features/           # Funcionalidades (ex: Auth)
+ │   │   ├── auth/
+ │   │   │   ├── pages/
+ │   │   │   │   ├── login/
+ │   │   │   │   └── register/
+ │   │   │   ├── services/
+ │   │   │   └── auth.routes.ts
+ │   ├── layout/             # Componentes de layout (header, footer, etc)
+ │   ├── shared/             # Componentes, diretivas e pipes reutilizáveis
+ │   └── app.component.ts
+ ├── assets/
+ └── styles/                 # Estilos globais (SCSS)
+ ```
 
-## Running unit tests
+## 🔧 Como Executar
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clonar o repositório
 
-## Running end-to-end tests
+```bash
+git clone https://github.com/pedrogles/medical-appointments.git
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+2. Instalar dependências
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm install
+```
+
+
+3. Configurar Firebase
+
+- Crie um projeto no Firebase Console
+- Ative Authentication → E-mail/Senha
+- Adicione as credenciais em src/environments/environment.ts:
+
+```
+export const environment = {
+  firebase: {
+    apiKey: 'SUA_API_KEY',
+    authDomain: 'SEU_DOMINIO.firebaseapp.com',
+    projectId: 'SEU_PROJECT_ID',
+    storageBucket: 'SEU_BUCKET.appspot.com',
+    messagingSenderId: 'SEU_ID',
+    appId: 'SEU_APP_ID'
+  },
+};
+```
+
+4. Executar a aplicação
+
+```bash
+ng serve
+```
+
+
+Acesse: http://localhost:4200
+
+## 🧠 Principais Recursos do Angular Utilizados
+
+- Reactive Forms com FormBuilder
+- Angular Material para UI e UX
+- SCSS modularizado
+- Arquitetura escalável: core, features, shared, layout
