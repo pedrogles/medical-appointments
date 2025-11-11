@@ -1,0 +1,45 @@
+<app-auth-layout title="Sign Up">
+    <form [formGroup]="registerForm" class="register-form" (ngSubmit)="handleRegister()">
+        <!-- User -->
+        <mat-form-field class="form-field">
+            <mat-label>Usuário</mat-label>
+            <input matInput formControlName="username" placeholder="Digite seu usuário...">
+            <mat-error *ngIf="formControls.username.errors?.['required']">
+                O campo usuário é obrigatório.
+            </mat-error>  
+        </mat-form-field>
+        <!-- Email -->
+        <mat-form-field class="form-field">
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" placeholder="Digite seu e-mail...">
+            <mat-error *ngIf="formControls.email.errors?.['required']">
+                O campo email é obrigatório.
+            </mat-error>  
+            <mat-error *ngIf="formControls.email.errors?.['email']">
+                O email informado não é válido. Verifique se digitou corretamente.
+            </mat-error>  
+        </mat-form-field>
+        <!-- Password -->
+        <mat-form-field class="form-field">
+            <mat-label>Senha</mat-label>
+            <input matInput formControlName="password" placeholder="Digite sua senha..." type="password">
+            <mat-error *ngIf="formControls.password.errors?.['required']">
+                O campo senha é obrigatório.
+            </mat-error>  
+        </mat-form-field>
+        <!-- Confirm password -->
+        <mat-form-field class="form-field">
+            <mat-label>Confirmar senha</mat-label>
+            <input matInput formControlName="confirmPassword" placeholder="Confirme sua senha..." type="password">
+        </mat-form-field>
+    
+        <button mat-flat-button type="submit" class="btn-submit" [disabled]="registerForm.invalid">
+            Cadastrar
+        </button>
+
+        <a class="login-redirect" (click)="handleRedirectToLogin()">
+            <span class="texts">Já possui uma conta?</span>
+            <span class="texts">Faça login aqui.</span>
+        </a>
+    </form>
+</app-auth-layout>
