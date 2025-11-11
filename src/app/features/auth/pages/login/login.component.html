@@ -1,0 +1,32 @@
+<app-auth-layout title="Sign In">
+    <form [formGroup]="loginForm" class="login-form" (ngSubmit)="handleLogin()">
+        <!-- E-mail -->
+        <mat-form-field class="form-field">
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="Digite seu email...">
+            <mat-error *ngIf="formControls.email.errors?.['required']">
+                O campo email é obrigatório.
+            </mat-error>  
+            <mat-error *ngIf="formControls.email.errors?.['email']">
+                O email informado não é válido. Verifique se digitou corretamente.
+            </mat-error>  
+        </mat-form-field>
+        <!-- Password -->
+        <mat-form-field class="form-field">
+            <mat-label>Senha</mat-label>
+            <input matInput formControlName="password" placeholder="Digite sua senha..." type="password">
+            <mat-error *ngIf="formControls.password.errors?.['required']">
+                O campo senha é obrigatório.
+            </mat-error>  
+        </mat-form-field>
+        <!-- Button -->
+        <button mat-flat-button type="submit" class="btn-submit" [disabled]="loginForm.invalid">
+            Entrar
+        </button>
+        <!-- Register redirect -->
+        <a class="register-redirect" (click)="handleRedirectToRegister()">
+            <span class="texts">Ainda não tem uma conta?</span>
+            <span class="texts">Crie sua conta aqui.</span>
+        </a>
+    </form>
+</app-auth-layout>

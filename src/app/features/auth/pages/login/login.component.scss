@@ -1,0 +1,46 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.3rem;
+    width: 100%;
+    max-width: 25rem;
+    padding: 1rem;  
+    .form-field {
+        width: 100%;
+    }
+    .btn-submit {
+        background-color: var(--primary);
+        border-radius: .3rem;
+        width: 100%;
+        font-size: var(--text-base);
+        height: 3rem;
+    }
+    .btn-submit:disabled {
+        background-color: var(--btn-disabled-bg);
+        color: var(--btn-disabled-text);
+    }
+    .btn-submit:hover {
+        background-color: var( --primary-hover);
+    }
+    .register-redirect {
+        display: flex;
+        flex-direction: column;
+        .texts {
+            font-size: var(--text-base);
+            color: var(--text-primary);
+            text-align: center;
+        }
+        .texts:last-child {
+            font-size: var(--text-sm);
+            color: var(--primary);
+            text-decoration: underline;
+            text-align: center;
+            cursor: pointer;
+        }
+    }
+} 
+
+:host ::ng-deep .mat-mdc-form-field-error-wrapper {
+    padding: 0 !important;
+}
