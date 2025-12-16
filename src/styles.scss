@@ -1,6 +1,8 @@
 @use './styles/mixins/reset' as reset;
 @use './styles/variables';
+@use './styles/material-theme.scss';
 
 @include reset.reset-css;
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
