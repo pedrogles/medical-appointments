@@ -18,13 +18,19 @@
             <mat-error *ngIf="formControls.password.errors?.['required']">
                 O campo senha é obrigatório.
             </mat-error>  
+            <mat-error *ngIf="formControls.password.errors?.['pattern']">
+                A senha deve ter no mínimo 8 caracteres, incluindo pelo menos uma letra maiúscula e um caractere especial.
+            </mat-error>  
         </mat-form-field>
         <!-- Button -->
         <button mat-flat-button type="submit" class="btn-submit" [disabled]="loginForm.invalid">
-            Entrar
+            @if(loading) 
+            { <mat-spinner class="spinner" diameter="20"></mat-spinner> } 
+            @else 
+            { Entrar }
         </button>
         <!-- Register redirect -->
-        <a class="register-redirect" (click)="handleRedirectToRegister()">
+        <a class="register-redirect" (click)="handleRedirect('register')">
             <span class="texts">Ainda não tem uma conta?</span>
             <span class="texts">Crie sua conta aqui.</span>
         </a>
