@@ -5,8 +5,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { IUser } from '../../../../core/interfaces/user.interface';
+import { AuthService } from '../../service/auth.service';
+import { finalize, switchMap } from 'rxjs';
+import { ToastService } from '../../../../core/services/toast/toast.service';
+import { REGEX } from '../../../../core/constants/regex';
+import { passwordMatchValidator } from '../../../../core/validators/password-match.validator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-register',
@@ -20,32 +27,52 @@ import { CommonModule } from '@angular/common';
       MatButtonModule, 
       ReactiveFormsModule,
       AuthLayoutComponent,
-      RouterLink
+      MatProgressSpinnerModule
     ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
   private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly toastService = inject(ToastService);
 
   loading = false;
   registerForm = this.formBuilder.group({
-    username: ['', [Validators.required]],
+    username: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.pattern(REGEX.password)]],
     confirmPassword: ['', [Validators.required]]
-  });
+  }, { validators: passwordMatchValidator('password', 'confirmPassword') });
 
   handleRegister(): void {
     if(this.registerForm.valid) {
       const { username, email, password } = this.registerForm.value;
-       console.log(`username: ${username}, email: ${email}, senha:${password}`)
+      const user = { username, email, password } as IUser;
+      this.loading = true;
+       this.authService.register(user)
+        .pipe(
+          switchMap(() => this.authService.logout()),
+          finalize(() => this.loading = false))
+        .subscribe({
+        next: () => {
+          this.handleRedirect('login');
+          this.toastService.show('Cadastro realizado com sucesso!', 'success');
+        },
+        error: (errorMessage: string) => {
+          this.toastService.show(errorMessage, 'error');
+        }
+      });
     }    
   }
 
-  handleRedirectToLogin(): void {
-    this.router.navigate(["auth/login"]);
+  handleRedirect(page: string): void {
+    switch(page) {
+      case 'login':
+        this.router.navigate(["auth/login"]);
+        break;
+    }
   }
 
   get formControls() {

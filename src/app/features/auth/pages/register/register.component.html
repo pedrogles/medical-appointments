@@ -7,6 +7,9 @@
             <mat-error *ngIf="formControls.username.errors?.['required']">
                 O campo usuário é obrigatório.
             </mat-error>  
+            <mat-error *ngIf="formControls.username.errors?.['minlength']">
+                O nome de usuário deve ter no mínimo 4 caracteres.
+            </mat-error>  
         </mat-form-field>
         <!-- Email -->
         <mat-form-field class="form-field">
@@ -26,18 +29,30 @@
             <mat-error *ngIf="formControls.password.errors?.['required']">
                 O campo senha é obrigatório.
             </mat-error>  
+            <mat-error *ngIf="formControls.password.errors?.['pattern']">
+                A senha deve ter no mínimo 8 caracteres, incluindo pelo menos uma letra maiúscula e um caractere especial.
+              </mat-error>
+            <mat-error *ngIf="registerForm.errors?.['passwordMismatch']">
+                As senhas não correspondem. Certifique-se de que ambas as senhas são iguais.
+            </mat-error>  
         </mat-form-field>
         <!-- Confirm password -->
         <mat-form-field class="form-field">
             <mat-label>Confirmar senha</mat-label>
             <input matInput formControlName="confirmPassword" placeholder="Confirme sua senha..." type="password">
+            <mat-error *ngIf="registerForm.errors?.['passwordMismatch']">
+                As senhas não correspondem. Certifique-se de que ambas as senhas são iguais.
+            </mat-error>  
         </mat-form-field>
     
         <button mat-flat-button type="submit" class="btn-submit" [disabled]="registerForm.invalid">
-            Cadastrar
+            @if(loading) 
+            { <mat-spinner class="spinner" diameter="20"></mat-spinner> } 
+            @else 
+            { Cadastrar }
         </button>
 
-        <a class="login-redirect" (click)="handleRedirectToLogin()">
+        <a class="login-redirect" (click)="handleRedirect('login')">
             <span class="texts">Já possui uma conta?</span>
             <span class="texts">Faça login aqui.</span>
         </a>

@@ -15,6 +15,9 @@
         width: 100%;
         font-size: var(--text-base);
         height: 3rem;
+        .spinner ::ng-deep circle {
+            stroke: var(--bg-default);
+        }
     }
     .btn-submit:disabled {
         background-color: var(--btn-disabled-bg);
