@@ -16,7 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RegisterDTO } from '../../dtos/register.dto';
 
 @Component({
-  selector: 'app-register',
+  selector: 'medical-register',
   standalone: true,
   imports: [
       FormsModule,

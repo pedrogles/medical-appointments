@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 
 @Component({
-  selector: 'app-auth-layout',
+  selector: 'medical-auth-layout',
   standalone: true,
   imports: [],
   templateUrl: './auth-layout.component.html',

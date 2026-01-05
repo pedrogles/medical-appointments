@@ -15,7 +15,7 @@ import { ToastService } from '../../../../core/services/toast/toast.service';
 import { LoginDTO } from '../../dtos/login.dto';
 
 @Component({
-  selector: 'app-login',
+  selector: 'medical-login',
   standalone: true,
   imports: [
     CommonModule,

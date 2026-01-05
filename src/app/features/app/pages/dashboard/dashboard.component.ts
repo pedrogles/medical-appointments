@@ -3,7 +3,7 @@ import { AuthService } from '../../../auth/service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'medical-dashboard',
   standalone: true,
   imports: [],
   templateUrl: './dashboard.component.html',
