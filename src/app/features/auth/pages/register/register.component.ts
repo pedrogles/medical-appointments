@@ -7,13 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { IUser } from '../../../../core/interfaces/user.interface';
 import { AuthService } from '../../service/auth.service';
 import { finalize, switchMap } from 'rxjs';
 import { ToastService } from '../../../../core/services/toast/toast.service';
 import { REGEX } from '../../../../core/constants/regex';
 import { passwordMatchValidator } from '../../../../core/validators/password-match.validator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RegisterDTO } from '../../dtos/register.dto';
 
 @Component({
   selector: 'app-register',
@@ -39,7 +39,8 @@ export class RegisterComponent {
   private readonly toastService = inject(ToastService);
 
   loading = false;
-  registerForm = this.formBuilder.group({
+  // Inclusão do nonNullable
+  registerForm = this.formBuilder.nonNullable.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern(REGEX.password)]],
@@ -48,8 +49,9 @@ export class RegisterComponent {
 
   handleRegister(): void {
     if(this.registerForm.valid) {
-      const { username, email, password } = this.registerForm.value;
-      const user = { username, email, password } as IUser;
+      // Alteração de IUser para RegisterDTO e simplificação do getRawValue
+      const { username, email, password } = this.registerForm.getRawValue();
+      const user: RegisterDTO = { username, email, password };
       this.loading = true;
        this.authService.register(user)
         .pipe(

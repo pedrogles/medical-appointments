@@ -8,11 +8,11 @@ import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.compon
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-import { IUser } from '../../../../core/interfaces/user.interface';
 import { REGEX } from '../../../../core/constants/regex';
 import { finalize } from 'rxjs';
 
 import { ToastService } from '../../../../core/services/toast/toast.service';
+import { LoginDTO } from '../../dtos/login.dto';
 
 @Component({
   selector: 'app-login',
@@ -37,15 +37,14 @@ export class LoginComponent {
   private readonly toastService = inject(ToastService);
   
   loading: boolean = false;
-  loginForm = this.formBuilder.group({
+  loginForm = this.formBuilder.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern(REGEX.password)]]
   })
 
   handleLogin(): void {
     if(this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      const user = { email, password } as IUser;
+      const user : LoginDTO = this.loginForm.getRawValue();
       this.loading = true;
       this.authService.login(user)
       .pipe(finalize(() => this.loading = false))
