@@ -1,47 +1,50 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthLayoutComponent } from './auth-layout.component';
+import { Component } from '@angular/core';
+import { By } from '@angular/platform-browser';
+
+@Component({
+  template: `
+    <medical-auth-layout [title]="'Login'">
+      <p class="projected-content">Projected content</p>
+    </medical-auth-layout>
+  `
+})
+class TestHostComponent {}
 
 describe('AuthLayoutComponent', () => {
-  let component: AuthLayoutComponent;
-  let fixture: ComponentFixture<AuthLayoutComponent>;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthLayoutComponent]
+      imports: [AuthLayoutComponent],
+      declarations: [TestHostComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AuthLayoutComponent);
+    fixture = TestBed.createComponent(TestHostComponent);
+    fixture.detectChanges();
   });
 
   it('should create', () => {
-    fixture.componentRef.setInput('title', 'Sign In');
-    fixture.detectChanges();
-    expect(fixture.componentInstance).toBeTruthy();
+    expect(fixture).toBeTruthy();
   });
 
-  describe('when used in Login page', () => {
-    beforeEach(() => {
-      fixture.componentRef.setInput('title', 'Sign In');
-      fixture.detectChanges();
-    });
-
-    it('should render Sign In title', () => {
-      const title = fixture.componentInstance.title();
-      expect(title).toBe('Sign In');
-    })
+  it('should render the title', () => {
+    const titleEl = fixture.debugElement.query(By.css('h1.title'));
+    expect(titleEl.nativeElement.textContent.trim()).toBe('Login');
   });
 
-  describe('when used in Register page', () => {
-    beforeEach(() => {
-      fixture.componentRef.setInput('title', 'Sign Up');
-      fixture.detectChanges();
-    });
+  it('should render the medical logo', () => {
+    const logoEl = fixture.debugElement.query(By.css('#medical-logo'));
+    expect(logoEl).toBeTruthy();
+    expect(logoEl.nativeElement.getAttribute('src')).toBe('medical-logo.svg');
+  });
 
-    it('should render Sign Up title', () => {
-      const title = fixture.componentInstance.title();
-      expect(title).toBe('Sign Up');
-    })
+  it('should project content via ng-content', () => {
+    const projectedEl = fixture.debugElement.query(By.css('.projected-content'));
+    expect(projectedEl).toBeTruthy();
+    expect(projectedEl.nativeElement.textContent.trim()).toBe('Projected content');
   });
 });
