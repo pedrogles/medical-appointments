@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { catchError, from, map, Observable, switchMap, throwError } from 'rxjs';
-import { FirebaseErrorService } from '../../../core/services/firebase-error/firebase-error.service';
-import { LoginDTO } from '../dtos/login.dto';
-import { RegisterDTO } from '../dtos/register.dto';
-import { FirebaseAuthAdapter } from '../../../core/adapters/firebase-auth-adapter/firebase-auth-adapter';
+import { FirebaseErrorService } from '../../../../core/services/firebase-error/firebase-error.service';
+import { LoginDTO } from '../../dtos/login.dto';
+import { RegisterDTO } from '../../dtos/register.dto';
+import { FirebaseAuthAdapter } from '../../../../core/adapters/firebase-auth/firebase-auth.adapter';
 
 @Injectable({
   providedIn: 'root'

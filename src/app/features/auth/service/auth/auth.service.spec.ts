@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import { FirebaseErrorService } from '../../../core/services/firebase-error/firebase-error.service';
-import { LoginDTO } from '../dtos/login.dto';
-import { RegisterDTO } from '../dtos/register.dto';
+import { FirebaseErrorService } from '../../../../core/services/firebase-error/firebase-error.service';
+import { LoginDTO } from '../../dtos/login.dto';
+import { RegisterDTO } from '../../dtos/register.dto';
 import * as firebaseAuth from 'firebase/auth';
-import { FirebaseAuthAdapter } from '../../../core/adapters/firebase-auth-adapter/firebase-auth-adapter';
+import { FirebaseAuthAdapter } from '../../../../core/adapters/firebase-auth/firebase-auth.adapter';
 
 describe('AuthService', () => {
   let service: AuthService;
