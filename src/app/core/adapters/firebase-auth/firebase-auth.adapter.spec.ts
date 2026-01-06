@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { FirebaseAuthAdapter } from './firebase-auth-adapter';
+import { FirebaseAuthAdapter } from './firebase-auth.adapter';
 import { Auth, UserCredential, User } from '@angular/fire/auth';
 
 describe('FirebaseAuthAdapter', () => {
