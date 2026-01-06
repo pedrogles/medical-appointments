@@ -8,7 +8,7 @@ import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.compon
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-import { REGEX } from '../../../../core/constants/regex';
+import { REGEX } from '../../../../core/constants/regex.constant';
 import { finalize } from 'rxjs';
 
 import { ToastService } from '../../../../core/services/toast/toast.service';

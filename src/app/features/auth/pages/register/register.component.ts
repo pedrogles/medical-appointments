@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
 import { finalize, switchMap } from 'rxjs';
 import { ToastService } from '../../../../core/services/toast/toast.service';
-import { REGEX } from '../../../../core/constants/regex';
+import { REGEX } from '../../../../core/constants/regex.constant';
 import { passwordMatchValidator } from '../../../../core/validators/password-match.validator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RegisterDTO } from '../../dtos/register.dto';
