@@ -4,7 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { IMenuItem } from '../../../../core/interfaces/menu.interface';
 import { menuItems } from '../../../../core/constants/menu.constant';
-import { AuthService } from '../../../auth/service/auth.service';
+import { AuthService } from '../../../auth/service/auth/auth.service';
 
 @Component({
   selector: 'medical-sidebar',

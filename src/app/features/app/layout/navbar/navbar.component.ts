@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Router, RouterModule } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
-import { AuthService } from '../../../auth/service/auth.service';
+import { AuthService } from '../../../auth/service/auth/auth.service';
 import { IMenuItem } from '../../../../core/interfaces/menu.interface';
 import { menuItems } from '../../../../core/constants/menu.constant';
 

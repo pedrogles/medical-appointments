@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../../service/auth/auth.service';
 import { finalize, switchMap } from 'rxjs';
 import { ToastService } from '../../../../core/services/toast/toast.service';
 import { REGEX } from '../../../../core/constants/regex.constant';

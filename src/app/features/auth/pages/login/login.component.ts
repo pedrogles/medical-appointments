@@ -7,7 +7,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../../service/auth/auth.service';
 import { REGEX } from '../../../../core/constants/regex.constant';
 import { finalize } from 'rxjs';
 
