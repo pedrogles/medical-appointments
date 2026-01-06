@@ -1,13 +1,13 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { Auth, authState } from '@angular/fire/auth';
 import { map, take } from 'rxjs';
+import { AuthSessionAdapter } from '../../../../core/adapters/auth-session/auth-session.adapter';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const firebaseAuth = inject(Auth);
+  const authSession = inject(AuthSessionAdapter);
   const router = inject(Router);
   
-  return authState(firebaseAuth).pipe(
+  return authSession.user$().pipe(
     take(1),
     map(user => user ? true : router.parseUrl('/auth/login'))
   );
