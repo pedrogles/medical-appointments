@@ -1,26 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { AuthService } from '../../../auth/service/auth.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { AppLayoutComponent } from '../../layout/app-layout/app-layout.component';
 
 @Component({
   selector: 'medical-dashboard',
   standalone: true,
-  imports: [],
+  imports: [AppLayoutComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-  private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
-  
-  handleLogout() {
-    this.authService.logout().subscribe({
-      next: () => {
-        this.router.navigate(['/auth/login']);
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
-  }
+
 }
