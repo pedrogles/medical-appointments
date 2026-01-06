@@ -10,7 +10,7 @@
         width: 100%;
     }
     .btn-submit {
-        background-color: var(--primary);
+        background-color: var(--primary-dark);
         border-radius: .3rem;
         width: 100%;
         font-size: var(--text-base);
@@ -24,7 +24,7 @@
         color: var(--btn-disabled-text);
     }
     .btn-submit:hover {
-        background-color: var( --primary-hover);
+        background-color: var( --primary-dark-hover);
     }
     .register-redirect {
         display: flex;
