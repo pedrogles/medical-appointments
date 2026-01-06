@@ -1,0 +1,38 @@
+<header id="navbar">
+    <img id="medical-logo" src="medical-logo.svg" alt="">
+    @if(isMenu) {
+        <mat-icon 
+            class="close-btn" 
+            aria-hidden="false" 
+            aria-label="Fechar menu" 
+            fontIcon="close" 
+            (click)="onChangeMenuState()">
+        </mat-icon>
+    } @else {
+        <mat-icon 
+            class="menu-btn" 
+            aria-hidden="false" 
+            aria-label="Abrir menu" 
+            fontIcon="menu" 
+            (click)="onChangeMenuState()">
+        </mat-icon>
+    }
+</header>
+<nav class="menu" [@openClose]="isMenu ? 'open' : 'close'">
+    <ul class="menu-list">
+        <mat-divider></mat-divider>
+        @for(item of menuItems; track item.id) {
+            <li>
+                <a class="menu-item" [routerLink]="item.route">
+                    <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
+                    {{ item.label }}
+                </a>
+            </li>
+        }
+        <mat-divider></mat-divider>
+    </ul>
+    <button class="logout-btn" (click)="onLogout()">
+        <mat-icon aria-hidden="false" aria-label="Botão sair" fontIcon="logout"></mat-icon>
+        Logout
+    </button>
+</nav>
