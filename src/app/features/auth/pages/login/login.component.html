@@ -14,7 +14,7 @@
         <!-- Password -->
         <mat-form-field class="form-field">
             <mat-label>Senha</mat-label>
-            <input matInput formControlName="password" placeholder="Digite sua senha..." type="password">
+            <input matInput formControlName="password" autocomplete="current-password" placeholder="Digite sua senha..." type="password">
             <mat-error *ngIf="formControls.password.errors?.['required']">
                 O campo senha é obrigatório.
             </mat-error>  

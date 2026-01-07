@@ -25,7 +25,7 @@
         <!-- Password -->
         <mat-form-field class="form-field">
             <mat-label>Senha</mat-label>
-            <input matInput formControlName="password" placeholder="Digite sua senha..." type="password">
+            <input matInput formControlName="password" autocomplete="new-password" placeholder="Digite sua senha..." type="password">
             <mat-error *ngIf="formControls.password.errors?.['required']">
                 O campo senha é obrigatório.
             </mat-error>  
@@ -39,7 +39,7 @@
         <!-- Confirm password -->
         <mat-form-field class="form-field">
             <mat-label>Confirmar senha</mat-label>
-            <input matInput formControlName="confirmPassword" placeholder="Confirme sua senha..." type="password">
+            <input matInput formControlName="confirmPassword" autocomplete="new-password" placeholder="Confirme sua senha..." type="password">
             <mat-error *ngIf="registerForm.errors?.['passwordMismatch']">
                 As senhas não correspondem. Certifique-se de que ambas as senhas são iguais.
             </mat-error>  
