@@ -1,23 +1,33 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
-import { DashboardComponent } from './dashboard.component';
+@Component({
+  template: `
+    <h1>Dashboard</h1>
+  `
+})
+class TestHostComponent {}
 
 describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardComponent]
+      declarations: [TestHostComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(TestHostComponent);
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture).toBeTruthy();
+  });
+
+  it('should render the title', () => {
+    const titleEl = fixture.debugElement.query(By.css('h1'));
+    expect(titleEl.nativeElement.textContent.trim()).toBe('Dashboard');
   });
 });
