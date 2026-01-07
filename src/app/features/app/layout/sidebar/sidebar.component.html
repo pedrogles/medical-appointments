@@ -1,0 +1,28 @@
+<aside id="aside">
+    <section class="up-section">
+        <article class="logo-article">
+            <img id="medical-logo" src="medical-logo.svg" alt="">
+            <h2 class="app-name">Medical Appointments</h2>
+        </article>
+        <mat-divider></mat-divider>
+        <nav class="menu">
+            <ul class="menu-list">
+                @for(item of menuItems; track item.id) {
+                    <li>
+                        <a class="menu-item" [routerLink]="item.route">
+                            <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
+                            {{ item.label }}
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+        <mat-divider></mat-divider>
+    </section>
+    <section class="down-section">
+        <button class="logout-btn" (click)="onLogout()">
+            <mat-icon aria-hidden="false" aria-label="Botão sair" fontIcon="logout"></mat-icon>
+            Logout
+        </button>
+    </section>
+</aside>
