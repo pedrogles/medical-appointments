@@ -6,14 +6,23 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { environments } from '../environments/environments';
+
+const firebaseConfig = {
+  apiKey: "<API_KEY>",
+  authDomain: "<AUTH_DOMAIN>",
+  projectId: "<PROJECT_ID>",
+  storageBucket: "<STORAGE_BUCKET>",
+  messagingSenderId: "<MESSAGING_SENDER_ID>",
+  appId: "<APP_ID>",
+  measurementId: "<MEASUREMENT_ID>"
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideFirebaseApp(() => initializeApp(environments.firebaseConfig)),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth())
   ]
 };
