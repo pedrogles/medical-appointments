@@ -58,9 +58,13 @@ export class LoginComponent {
     //     }
     //   })
     // }     
-
-    this.handleRedirect('dashboard');
-    this.toastService.show('Login realizado com sucesso!', 'success');
+    
+    this.loading = true;
+    setTimeout(() => {
+      this.handleRedirect('dashboard');
+      this.toastService.show('Login realizado com sucesso!', 'success');
+      this.loading = false;
+    }, 2000);
   }
 
   handleRedirect(page: string): void {

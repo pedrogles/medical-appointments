@@ -66,8 +66,12 @@ export class RegisterComponent {
     //   });
     // }    
 
-    this.handleRedirect('login');
-    this.toastService.show('Cadastro realizado com sucesso!', 'success');
+    this.loading = true;
+    setTimeout(() => {
+      this.handleRedirect('login');
+      this.toastService.show('Cadastro realizado com sucesso!', 'success');
+      this.loading = false;
+    }, 2000);
   }
 
   handleRedirect(page: string): void {
