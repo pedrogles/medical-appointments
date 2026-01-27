@@ -39,7 +39,6 @@ export class RegisterComponent {
   private readonly toastService = inject(ToastService);
 
   loading = false;
-  // Inclusão do nonNullable
   registerForm = this.formBuilder.nonNullable.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]],
@@ -48,25 +47,27 @@ export class RegisterComponent {
   }, { validators: passwordMatchValidator('password', 'confirmPassword') });
 
   handleRegister(): void {
-    if(this.registerForm.valid) {
-      // Alteração de IUser para RegisterDTO e simplificação do getRawValue
-      const { username, email, password } = this.registerForm.getRawValue();
-      const user: RegisterDTO = { username, email, password };
-      this.loading = true;
-       this.authService.register(user)
-        .pipe(
-          switchMap(() => this.authService.logout()),
-          finalize(() => this.loading = false))
-        .subscribe({
-        next: () => {
-          this.handleRedirect('login');
-          this.toastService.show('Cadastro realizado com sucesso!', 'success');
-        },
-        error: (errorMessage: string) => {
-          this.toastService.show(errorMessage, 'error');
-        }
-      });
-    }    
+    // if(this.registerForm.valid) {
+    //   const { username, email, password } = this.registerForm.getRawValue();
+    //   const user: RegisterDTO = { username, email, password };
+    //   this.loading = true;
+    //    this.authService.register(user)
+    //     .pipe(
+    //       switchMap(() => this.authService.logout()),
+    //       finalize(() => this.loading = false))
+    //     .subscribe({
+    //     next: () => {
+    //       this.handleRedirect('login');
+    //       this.toastService.show('Cadastro realizado com sucesso!', 'success');
+    //     },
+    //     error: (errorMessage: string) => {
+    //       this.toastService.show(errorMessage, 'error');
+    //     }
+    //   });
+    // }    
+
+    this.handleRedirect('login');
+    this.toastService.show('Cadastro realizado com sucesso!', 'success');
   }
 
   handleRedirect(page: string): void {

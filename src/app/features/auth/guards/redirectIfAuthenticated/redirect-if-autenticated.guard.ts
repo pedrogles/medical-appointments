@@ -7,8 +7,10 @@ export const redirectIfAutenticatedGuard: CanActivateFn = (route, state) => {
   const authSession = inject(AuthSessionAdapter);
   const router = inject(Router);
   
-  return authSession.user$().pipe(
-    take(1),
-    map(user => user ? router.parseUrl('/app/dashboard') : true)
-  );
+  // return authSession.user$().pipe(
+  //   take(1),
+  //   map(user => user ? router.parseUrl('/app/dashboard') : true)
+  // );
+
+  return true;
 };

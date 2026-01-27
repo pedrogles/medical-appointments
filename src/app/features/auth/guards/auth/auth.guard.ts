@@ -7,8 +7,10 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authSession = inject(AuthSessionAdapter);
   const router = inject(Router);
   
-  return authSession.user$().pipe(
-    take(1),
-    map(user => user ? true : router.parseUrl('/auth/login'))
-  );
+  // return authSession.user$().pipe(
+  //   take(1),
+  //   map(user => user ? true : router.parseUrl('/auth/login'))
+  // );
+  
+  return true;
 };

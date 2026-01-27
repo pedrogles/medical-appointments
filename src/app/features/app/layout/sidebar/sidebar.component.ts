@@ -19,15 +19,17 @@ export class SidebarComponent {
   private readonly router = inject(Router);
 
   onLogout(): void {
-    this.authService.logout().subscribe({
-      next: () => {
-        // Adicionar toast de confirmação
-        this.router.navigate(["auth/login"]);
-      },
-      error: (error) => {
-        // Adicionar toast de erro
-        console.log(error)
-      }
-    })
+    // this.authService.logout().subscribe({
+    //   next: () => {
+    //     // Adicionar toast de confirmação
+    //     this.router.navigate(["auth/login"]);
+    //   },
+    //   error: (error) => {
+    //     // Adicionar toast de erro
+    //     console.log(error)
+    //   }
+    // })
+    
+    this.router.navigate(["auth/login"]);
   }
 }

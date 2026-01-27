@@ -43,21 +43,24 @@ export class LoginComponent {
   })
 
   handleLogin(): void {
-    if(this.loginForm.valid) {
-      const user : LoginDTO = this.loginForm.getRawValue();
-      this.loading = true;
-      this.authService.login(user)
-      .pipe(finalize(() => this.loading = false))
-      .subscribe({
-        next: () => {
-          this.handleRedirect('dashboard');
-          this.toastService.show('Login realizado com sucesso!', 'success');
-        },
-        error: (errorMessage: string) => {
-          this.toastService.show(errorMessage, 'error');
-        }
-      })
-    }     
+    // if(this.loginForm.valid) {
+    //   const user : LoginDTO = this.loginForm.getRawValue();
+    //   this.loading = true;
+    //   this.authService.login(user)
+    //   .pipe(finalize(() => this.loading = false))
+    //   .subscribe({
+    //     next: () => {
+    //       this.handleRedirect('dashboard');
+    //       this.toastService.show('Login realizado com sucesso!', 'success');
+    //     },
+    //     error: (errorMessage: string) => {
+    //       this.toastService.show(errorMessage, 'error');
+    //     }
+    //   })
+    // }     
+
+    this.handleRedirect('dashboard');
+    this.toastService.show('Login realizado com sucesso!', 'success');
   }
 
   handleRedirect(page: string): void {
