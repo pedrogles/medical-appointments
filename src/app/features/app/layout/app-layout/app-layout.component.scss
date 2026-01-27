@@ -17,6 +17,17 @@
             color: var(--text-primary);
         }
 
+        .demo-info {
+            display: flex;
+            flex-direction: column;
+            font-size: var(--text-xs);
+            color: var(--info);
+            text-align: center;
+            .link {
+                text-decoration: underline;
+            }
+        }
+
         @media (min-width: 1024px) {
             padding: 1rem 1rem 1rem 19rem;
         }
