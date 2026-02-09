@@ -1,8 +1,37 @@
 import { IMenuItem } from "../interfaces/menu.interface";
 
 export const menuItems: IMenuItem[] = [
-    { id: 0, label: 'Dashboard', route: '/app/dashboard', icon: 'home' },
-    { id: 1, label: 'Cadastro de Paciente', route: '/app/cadastro-de-paciente', icon: 'person_add' },
-    { id: 2, label: 'Agendamento de Consulta', route: '/app/agendamento', icon: 'add_circle' },
-    { id: 3, label: 'Gerenciar Pacientes/Consultas', route: '/app/gerenciamento', icon: 'list'}
+    { 
+        id: 0, 
+        label: 'Dashboard', 
+        route: '/app/dashboard', 
+        icon: 'home',
+        type: 'anchor'
+    },
+    { 
+        id: 1, 
+        label: 'Adicionar Registro', 
+        icon: 'person_add',
+        type: 'button',
+        options: [
+            {
+                label: 'Cadastrar Paciente',
+                route: '/app/pacientes/novo',
+            }
+        ]
+    },
+    { 
+        id: 2, 
+        label: 'Agendar Consulta', 
+        route: '/app/agendamento', 
+        icon: 'add_circle',
+        type: 'anchor'
+    },
+    { 
+        id: 3, 
+        label: 'Gerenciar Pacientes/Consultas', 
+        route: '/app/gerenciamento', 
+        icon: 'list',
+        type: 'anchor'
+    }
 ]

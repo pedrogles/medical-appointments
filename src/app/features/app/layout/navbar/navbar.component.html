@@ -23,10 +23,25 @@
         <mat-divider></mat-divider>
         @for(item of menuItems; track item.id) {
             <li>
-                <a class="menu-item" [routerLink]="item.route">
-                    <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
-                    {{ item.label }}
-                </a>
+                @if(item.type === 'anchor') {
+                    <a class="menu-item" [routerLink]="item.route">
+                        <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
+                        {{ item.label }}
+                    </a>
+                } 
+                @else if(item.type === 'button') {
+                    <button class="menu-item" matButton [matMenuTriggerFor]="menu">
+                        <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
+                        {{item.label}}
+                    </button>
+                    <mat-menu #menu="matMenu" class="mat-menu-custom-navbar">
+                        @for(option of item.options; track option.label) {
+                            <button mat-menu-item [routerLink]="option.route">
+                                {{option.label}}
+                            </button>
+                        }
+                    </mat-menu>
+                }
             </li>
         }
         <mat-divider></mat-divider>

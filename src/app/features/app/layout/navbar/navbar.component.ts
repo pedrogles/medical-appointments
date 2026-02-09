@@ -3,6 +3,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Router, RouterModule } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../../auth/service/auth/auth.service';
 import { IMenuItem } from '../../../../core/interfaces/menu.interface';
 import { menuItems } from '../../../../core/constants/menu.constant';
@@ -10,7 +12,13 @@ import { menuItems } from '../../../../core/constants/menu.constant';
 @Component({
   selector: 'medical-navbar',
   standalone: true,
-  imports: [MatIconModule, RouterModule, MatDividerModule],
+  imports: [
+    MatIconModule, 
+    RouterModule, 
+    MatDividerModule,
+    MatMenuModule,
+    MatButtonModule
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   animations: [

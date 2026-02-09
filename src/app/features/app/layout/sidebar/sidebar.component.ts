@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 import { IMenuItem } from '../../../../core/interfaces/menu.interface';
 import { menuItems } from '../../../../core/constants/menu.constant';
 import { AuthService } from '../../../auth/service/auth/auth.service';
@@ -9,7 +11,13 @@ import { AuthService } from '../../../auth/service/auth/auth.service';
 @Component({
   selector: 'medical-sidebar',
   standalone: true,
-  imports: [MatDividerModule, RouterModule, MatIconModule],
+  imports: [
+    MatDividerModule, 
+    RouterModule, 
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule
+  ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'  
 })

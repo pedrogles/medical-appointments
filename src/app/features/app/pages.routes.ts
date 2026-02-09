@@ -13,7 +13,7 @@ export const PAGES_ROUTES: Routes = [
         component: DashboardComponent, 
     },
     { 
-        path: 'cadastro-de-paciente', 
+        path: 'pacientes/novo', 
         component: PatientRegistrationComponent, 
     },
     {
