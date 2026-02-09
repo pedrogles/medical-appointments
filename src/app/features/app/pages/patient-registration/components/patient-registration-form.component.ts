@@ -1,0 +1,93 @@
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { cpfMismatchValidator } from '../../../../../core/validators/cpf-mismatch.validator';
+import { REGEX } from '../../../../../core/constants/regex.constant';
+import { ToastService } from '../../../../../core/services/toast/toast.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { IPatient } from '../../../../../core/interfaces/patient.interface';
+import { NgxMaskDirective } from 'ngx-mask';
+
+@Component({
+  selector: 'medical-patient-registration-form',
+  standalone: true,
+  imports: [
+    FormsModule,
+    CommonModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatCardModule, 
+    MatButtonModule, 
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    NgxMaskDirective
+  ],
+  templateUrl: './patient-registration-form.component.html',
+  styleUrl: './patient-registration-form.component.scss'
+})
+export class PatientRegistrationFormComponent implements OnInit {
+  patientForm!: FormGroup;
+  isLoading = true;
+  sexOptions = [
+    { id: 0, name: 'Masculino', value: 'M' },
+    { id: 1, name: 'Feminino', value: 'F' }
+  ];
+  
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly toast = inject(ToastService);
+
+  ngOnInit(): void {
+    this.initializeForm();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+  }
+
+  initializeForm(): void {
+    this.patientForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(6)]],
+      birth: ['', [Validators.required, Validators.maxLength(10)]],
+      cpf: ['', [Validators.required, cpfMismatchValidator]],
+      rg: ['', [Validators.required, Validators.pattern(REGEX.rg)]],
+      sex: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.minLength(11)]],
+      email: ['', [Validators.required, Validators.email]],
+      address: this.formBuilder.group({
+        number: ['', [Validators.required]],
+        zipCode: ['', [Validators.required, Validators.pattern(REGEX.zipCode)]],
+        street: [{ value: '', disabled: true }, [Validators.required]],
+        district: [{ value: '', disabled: true }, [Validators.required]],
+        city: [{ value: '', disabled: true }, [Validators.required]],
+        state: [{ value: '', disabled: true }, [Validators.required]]
+      })
+    });
+  }
+
+  onSubmit(): void {
+    const patient = this.patientForm.getRawValue() as IPatient;
+    this.isLoading = true;
+    setTimeout(() => {
+      this.toast.show(`Paciente "${patient.name}" cadastrado(a) com sucesso!`, 'success');
+      this.isLoading = false;
+      this.patientForm.reset();
+    }, 2000); 
+  }
+
+  onZipCodeChange(zipCode: Event): void {
+
+  }
+
+  get formControls(): FormGroup['controls'] {
+    return this.patientForm.controls;
+  }
+
+  get addressGroup(): FormGroup {
+    return this.patientForm.get('address') as FormGroup;
+  }
+}
