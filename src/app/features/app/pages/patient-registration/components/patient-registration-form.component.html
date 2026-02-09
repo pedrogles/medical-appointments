@@ -53,9 +53,9 @@
                 <mat-form-field class="form-field">
                     <mat-label>Sexo</mat-label>
                     <mat-select formControlName="sex">
-                        @for(sex of sexOptions; track sex.id) {
+                        @for(sex of sexOptions; track sex.value) {
                             <mat-option [value]="sex.value">
-                                {{ sex.name }}
+                                {{ sex.label }}
                             </mat-option>
                         }
                     </mat-select>

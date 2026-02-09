@@ -12,6 +12,7 @@ import { ToastService } from '../../../../../core/services/toast/toast.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { IPatient } from '../../../../../core/interfaces/patient.interface';
 import { NgxMaskDirective } from 'ngx-mask';
+import { SEX_OPTIONS } from '../../../../../core/constants/sex-options.constant';
 
 @Component({
   selector: 'medical-patient-registration-form',
@@ -34,10 +35,7 @@ import { NgxMaskDirective } from 'ngx-mask';
 export class PatientRegistrationFormComponent implements OnInit {
   patientForm!: FormGroup;
   isLoading = true;
-  sexOptions = [
-    { id: 0, name: 'Masculino', value: 'M' },
-    { id: 1, name: 'Feminino', value: 'F' }
-  ];
+  readonly sexOptions = SEX_OPTIONS;
   
   private readonly formBuilder = inject(FormBuilder);
   private readonly toast = inject(ToastService);
