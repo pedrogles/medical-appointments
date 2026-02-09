@@ -1,10 +1,12 @@
+export type PatientSex = 'M' | 'F';
+
 export interface IPatient {
     readonly id: string;
     name: string;
     birth: string;
     cpf: string;
     rg: string;
-    sex: string;
+    sex: PatientSex;
     phone: string;
     email: string;
     address: {
