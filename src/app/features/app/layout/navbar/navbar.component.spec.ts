@@ -6,6 +6,7 @@ import { provideRouter } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MENU_ITEMS } from '../../../../core/constants/menu.constant';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -59,7 +60,7 @@ describe('NavbarComponent', () => {
       component.isMenu = true;
       fixture.detectChanges();
       const items = fixture.nativeElement.querySelectorAll('.menu-item');
-      expect(items.length).toBe(component.menuItems.length);
+      expect(items.length).toBe(MENU_ITEMS.length);
     });
 
     it('should call logout and navigate on logout button click', () => {

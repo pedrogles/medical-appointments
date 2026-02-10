@@ -1,6 +1,6 @@
 import { IMenuItem } from "../interfaces/menu.interface";
 
-export const menuItems: IMenuItem[] = [
+export const MENU_ITEMS: IMenuItem[] = [
     { 
         id: 0, 
         label: 'Dashboard', 
@@ -34,4 +34,4 @@ export const menuItems: IMenuItem[] = [
         icon: 'list',
         type: 'anchor'
     }
-]
+] as const;

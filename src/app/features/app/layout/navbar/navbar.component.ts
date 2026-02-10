@@ -7,7 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../../auth/service/auth/auth.service';
 import { IMenuItem } from '../../../../core/interfaces/menu.interface';
-import { menuItems } from '../../../../core/constants/menu.constant';
+import { MENU_ITEMS } from '../../../../core/constants/menu.constant';
 
 @Component({
   selector: 'medical-navbar',
@@ -31,8 +31,9 @@ import { menuItems } from '../../../../core/constants/menu.constant';
   ]
 })
 export class NavbarComponent {
+  readonly menuItems: IMenuItem[] = MENU_ITEMS;
+
   isMenu = false;
-  menuItems: IMenuItem[] = menuItems;
 
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
@@ -44,7 +45,6 @@ export class NavbarComponent {
   onLogout(): void {
     this.authService.logout().subscribe({
       next: () => {
-        // Adicionar toast de confirmação
         this.router.navigate(["auth/login"]);
       },
       error: (error) => {

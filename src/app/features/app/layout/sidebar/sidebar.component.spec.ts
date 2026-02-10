@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MENU_ITEMS } from '../../../../core/constants/menu.constant';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -45,7 +46,7 @@ describe('SidebarComponent', () => {
 
   it('should render menu items', () => {
     const items = fixture.nativeElement.querySelectorAll('.menu-item');
-    expect(items.length).toBe(component.menuItems.length);
+    expect(items.length).toBe(MENU_ITEMS.length);
   });
 
   it('should call logout and navigate on logout button click', () => {
