@@ -4,15 +4,15 @@
     <form [formGroup]="patientForm" class="patient-form" (ngSubmit)="onSubmit()">
         <fieldset>
             <legend>Dados Pessoais</legend>
-            <div class="inputs">
+            <div formGroupName="personalData" class="inputs">
                 <!-- Name -->
                 <mat-form-field class="form-field">
                     <mat-label>Nome do paciente</mat-label>
                     <input matInput formControlName="name" placeholder="Digite o nome do paciente...">
-                    <mat-error *ngIf="formControls['name'].errors?.['required']">
+                    <mat-error *ngIf="personalDataGroup.get('name')?.errors?.['required']">
                         O campo nome do paciente é obrigatório.
                     </mat-error>  
-                    <mat-error *ngIf="formControls['name'].errors?.['minlength']">
+                    <mat-error *ngIf="personalDataGroup.get('name')?.errors?.['minlength']">
                         O nome do paciente deve ter no mínimo 6 caracteres.
                     </mat-error>  
                 </mat-form-field>
@@ -20,10 +20,10 @@
                 <mat-form-field class="form-field">
                     <mat-label>Data de nascimento</mat-label>
                     <input matInput formControlName="birth" type="date">
-                    <mat-error *ngIf="formControls['birth'].errors?.['required']">
+                    <mat-error *ngIf="personalDataGroup.get('birth')?.errors?.['required']">
                         O campo data de nascimento é obrigatório.
                     </mat-error>  
-                    <mat-error *ngIf="formControls['birth'].errors?.['maxlength']">
+                    <mat-error *ngIf="personalDataGroup.get('birth')?.errors?.['maxlength']">
                         A data deve ter no máximo 8 caracteres.
                     </mat-error>  
                 </mat-form-field>
@@ -31,10 +31,10 @@
                 <mat-form-field class="form-field">
                     <mat-label>Cpf</mat-label>
                     <input matInput formControlName="cpf" mask="000.000.000-00" placeholder="Digite seu cpf...">
-                    <mat-error *ngIf="formControls['cpf'].errors?.['required']">
+                    <mat-error *ngIf="personalDataGroup.get('cpf')?.errors?.['required']">
                         O campo cpf é obrigatório.
                     </mat-error>  
-                    <mat-error *ngIf="formControls['cpf'].errors?.['cpfMismatch']">
+                    <mat-error *ngIf="personalDataGroup.get('cpf')?.errors?.['cpfMismatch']">
                         O cpf informado não é válido. Verifique se digitou corretamente.
                     </mat-error>  
                 </mat-form-field>
@@ -42,10 +42,10 @@
                 <mat-form-field class="form-field">
                     <mat-label>Rg</mat-label>
                     <input matInput formControlName="rg" placeholder="Digite seu rg...">
-                    <mat-error *ngIf="formControls['rg'].errors?.['required']">
+                    <mat-error *ngIf="personalDataGroup.get('rg')?.errors?.['required']">
                         O campo rg é obrigatório.
                     </mat-error>  
-                    <mat-error *ngIf="formControls['rg'].errors?.['pattern']">
+                    <mat-error *ngIf="personalDataGroup.get('rg')?.errors?.['pattern']">
                         O rg informado não é válido. Verifique se digitou corretamente.
                     </mat-error>  
                 </mat-form-field>
@@ -59,7 +59,7 @@
                             </mat-option>
                         }
                     </mat-select>
-                    <mat-error *ngIf="formControls['sex'].errors?.['required']">
+                    <mat-error *ngIf="personalDataGroup.get('sex')?.errors?.['required']">
                         O campo sexo é obrigatório.
                     </mat-error> 
                 </mat-form-field>
@@ -67,10 +67,10 @@
                 <mat-form-field class="form-field">
                     <mat-label>Telefone</mat-label>
                     <input matInput formControlName="phone" mask="(00)00000-0000" type="tel">
-                    <mat-error *ngIf="formControls['phone'].errors?.['required']">
+                    <mat-error *ngIf="personalDataGroup.get('phone')?.errors?.['required']">
                         O campo telefone é obrigatório.
                     </mat-error>  
-                    <mat-error *ngIf="formControls['phone'].errors?.['minlength']">
+                    <mat-error *ngIf="personalDataGroup.get('phone')?.errors?.['minlength']">
                         O numero informado não é válido. Verifique se digitou corretamente.
                     </mat-error>  
                 </mat-form-field>
@@ -78,10 +78,10 @@
                 <mat-form-field class="form-field">
                     <mat-label>E-mail</mat-label>
                     <input matInput formControlName="email" placeholder="Digite seu e-mail...">
-                    <mat-error *ngIf="formControls['email'].errors?.['required']">
+                    <mat-error *ngIf="personalDataGroup.get('email')?.errors?.['required']">
                         O campo email é obrigatório.
                     </mat-error>  
-                    <mat-error *ngIf="formControls['email'].errors?.['email']">
+                    <mat-error *ngIf="personalDataGroup.get('email')?.errors?.['email']">
                         O email informado não é válido. Verifique se digitou corretamente.
                     </mat-error>  
                 </mat-form-field>

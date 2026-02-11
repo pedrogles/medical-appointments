@@ -10,9 +10,9 @@ import { cpfMismatchValidator } from '../../../../../core/validators/cpf-mismatc
 import { REGEX } from '../../../../../core/constants/regex.constant';
 import { ToastService } from '../../../../../core/services/toast/toast.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { IPatient } from '../../../../../core/interfaces/patient.interface';
 import { NgxMaskDirective } from 'ngx-mask';
 import { SEX_OPTIONS } from '../../../../../core/constants/sex-options.constant';
+import { CreatePatientDTO } from '../dtos/create-patient.dto';
 
 @Component({
   selector: 'medical-patient-registration-form',
@@ -49,13 +49,15 @@ export class PatientRegistrationFormComponent implements OnInit {
 
   initializeForm(): void {
     this.patientForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(6)]],
-      birth: ['', [Validators.required, Validators.maxLength(10)]],
-      cpf: ['', [Validators.required, cpfMismatchValidator]],
-      rg: ['', [Validators.required, Validators.pattern(REGEX.rg)]],
-      sex: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.minLength(11)]],
-      email: ['', [Validators.required, Validators.email]],
+      personalData: this.formBuilder.group({
+        name: ['', [Validators.required, Validators.minLength(6)]],
+        birth: ['', [Validators.required, Validators.maxLength(10)]],
+        cpf: ['', [Validators.required, cpfMismatchValidator]],
+        rg: ['', [Validators.required, Validators.pattern(REGEX.rg)]],
+        sex: ['', [Validators.required]],
+        phone: ['', [Validators.required, Validators.minLength(11)]],
+        email: ['', [Validators.required, Validators.email]],
+      }),
       address: this.formBuilder.group({
         number: ['', [Validators.required]],
         zipCode: ['', [Validators.required, Validators.pattern(REGEX.zipCode)]],
@@ -68,7 +70,10 @@ export class PatientRegistrationFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const patient = this.patientForm.getRawValue() as IPatient;
+    const patient = {
+      ...this.patientForm.value.personalData,
+      ...this.patientForm.value.address
+    } as CreatePatientDTO;
     this.isLoading = true;
     setTimeout(() => {
       this.toast.show(`Paciente "${patient.name}" cadastrado(a) com sucesso!`, 'success');
@@ -81,8 +86,8 @@ export class PatientRegistrationFormComponent implements OnInit {
 
   }
 
-  get formControls(): FormGroup['controls'] {
-    return this.patientForm.controls;
+  get personalDataGroup(): FormGroup {
+      return this.patientForm.get('personalData') as FormGroup;
   }
 
   get addressGroup(): FormGroup {

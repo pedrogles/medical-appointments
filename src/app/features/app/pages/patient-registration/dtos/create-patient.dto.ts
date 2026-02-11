@@ -1,20 +1,13 @@
-import { SexType } from '../types/sex.type';
+import { SexType } from "../../../../../core/types/sex.type";
 
-export interface IPatient {
-    readonly id: string;
-
-    // Dados pessoais
+export interface CreatePatientDTO {
     name: string;
     birth: string;
     cpf: string;
     rg: string;
     sex: SexType;
-
-    // Contato
     phone: string;
     email: string;
-
-    // Endereço
     address: {
         street: string;
         number: string;
@@ -23,8 +16,4 @@ export interface IPatient {
         state: string;
         zipCode: string;
     }
-
-    // Controle
-//   createdAt?: string;
-//   updatedAt?: string;
 }
