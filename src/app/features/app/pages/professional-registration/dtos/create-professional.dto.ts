@@ -15,9 +15,10 @@ export interface CreateProfessionalDTO {
         district: string;
         city: string;
         state: string;
-        zipCode: string;
+        zip_code: string;
     };
     specialty: string;
-    registrationType: ProfessionalRegistrationType;
-    registrationNumber: string;
+    registration_type: ProfessionalRegistrationType;
+    registration_jurisdiction: string;
+    registration_number: string;
 }

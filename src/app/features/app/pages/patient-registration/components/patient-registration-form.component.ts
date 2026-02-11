@@ -70,15 +70,31 @@ export class PatientRegistrationFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const patient = {
-      ...this.patientForm.value.personalData,
-      ...this.patientForm.value.address
-    } as CreatePatientDTO;
     this.isLoading = true;
+
+    const formValue = this.patientForm.getRawValue();
+    const patientData: CreatePatientDTO = {
+      name: formValue.personalData.name,
+      birth: formValue.personalData.birth,
+      cpf: formValue.personalData.cpf,
+      rg: formValue.personalData.rg,
+      sex: formValue.personalData.sex,
+      phone: formValue.personalData.phone,
+      email: formValue.personalData.email,
+      address: {
+          street: formValue.address.street,
+          number: formValue.address.number,
+          district: formValue.address.district,
+          city: formValue.address.city,
+          state: formValue.address.state,
+          zip_code: formValue.address.zipCode,
+      }
+    };
     setTimeout(() => {
-      this.toast.show(`Paciente "${patient.name}" cadastrado(a) com sucesso!`, 'success');
+      this.toast.show(`Paciente "${patientData.name}" cadastrado(a) com sucesso!`, 'success');
       this.isLoading = false;
       this.patientForm.reset();
+      console.log(patientData);
     }, 2000); 
   }
 

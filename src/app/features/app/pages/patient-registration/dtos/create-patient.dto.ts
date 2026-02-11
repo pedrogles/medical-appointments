@@ -14,6 +14,6 @@ export interface CreatePatientDTO {
         district: string;
         city: string;
         state: string;
-        zipCode: string;
+        zip_code: string;
     }
 }

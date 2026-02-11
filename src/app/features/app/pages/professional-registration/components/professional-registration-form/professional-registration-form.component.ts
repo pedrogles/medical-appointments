@@ -79,14 +79,32 @@ export class ProfessionalRegistrationFormComponent implements OnInit {
     }
   
     onSubmit(): void {
-      const professional = {
-        ...this.professionalForm.value.personalData,
-        ...this.professionalForm.value.professionalData,
-        ...this.professionalForm.value.address
-      } as CreateProfessionalDTO;
       this.isLoading = true;
+      
+      const formValue = this.professionalForm.getRawValue();
+      const professionalData: CreateProfessionalDTO = {
+        name: formValue.personalData.name,
+        birth: formValue.personalData.birth,
+        cpf: formValue.personalData.cpf,
+        rg: formValue.personalData.rg,
+        sex: formValue.personalData.sex,
+        phone: formValue.personalData.phone,
+        email: formValue.personalData.email,
+        address: {
+            street: formValue.address.street,
+            number: formValue.address.number,
+            district: formValue.address.district,
+            city: formValue.address.city,
+            state: formValue.address.state,
+            zip_code: formValue.address.zipCode,
+        },
+        specialty: formValue.professionalData.specialty,
+        registration_type:  formValue.professionalData.registrationType,
+        registration_number: formValue.professionalData.registrationNumber,
+        registration_jurisdiction: formValue.professionalData.registrationJurisdiction
+      };
       setTimeout(() => {
-        this.toast.show(`Profissional "${professional.name}" cadastrado(a) com sucesso!`, 'success');
+        this.toast.show(`Profissional "${professionalData.name}" cadastrado(a) com sucesso!`, 'success');
         this.isLoading = false;
         this.professionalForm.reset();
       }, 2000); 
