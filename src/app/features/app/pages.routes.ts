@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { PatientRegistrationComponent } from "./pages/patient-registration/patient-registration.component";
+import { ProfessionalRegistrationComponent } from "./pages/professional-registration/professional-registration.component";
 
 export const PAGES_ROUTES: Routes = [
     {
@@ -15,6 +16,10 @@ export const PAGES_ROUTES: Routes = [
     { 
         path: 'pacientes/novo', 
         component: PatientRegistrationComponent, 
+    },
+    { 
+        path: 'profissionais/novo', 
+        component: ProfessionalRegistrationComponent, 
     },
     {
         path: '**',

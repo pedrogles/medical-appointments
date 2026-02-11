@@ -17,6 +17,10 @@ export const MENU_ITEMS: IMenuItem[] = [
             {
                 label: 'Cadastrar Paciente',
                 route: '/app/pacientes/novo',
+            },
+            {
+                label: 'Cadastrar Profissional',
+                route: '/app/profissionais/novo',
             }
         ]
     },
