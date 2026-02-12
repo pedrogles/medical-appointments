@@ -1,15 +1,10 @@
-type MenuType = 'anchor' | 'button';
-
-type MenuOption = {
-    label: string;
-    route: string;
-};
+import { MenuItemType, MenuSubItem } from '../types/menu.type';
 
 export interface IMenuItem {
     id: number;
     label: string;
     route?: string;
     icon?: string;
-    type: MenuType;
-    options?: MenuOption[];
+    type: MenuItemType;
+    children?: MenuSubItem[];
 }

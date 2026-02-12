@@ -23,19 +23,19 @@
         <mat-divider></mat-divider>
         @for(item of menuItems; track item.id) {
             <li>
-                @if(item.type === 'anchor') {
+                @if(item.type === 'link') {
                     <a class="menu-item" [routerLink]="item.route">
                         <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
                         {{ item.label }}
                     </a>
                 } 
-                @else if(item.type === 'button') {
+                @else if(item.type === 'submenu') {
                     <button class="menu-item" matButton [matMenuTriggerFor]="menu">
                         <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
                         {{item.label}}
                     </button>
                     <mat-menu #menu="matMenu" class="mat-menu-custom-navbar">
-                        @for(option of item.options; track option.label) {
+                        @for(option of item.children; track option.label) {
                             <button mat-menu-item [routerLink]="option.route">
                                 {{option.label}}
                             </button>

@@ -6,14 +6,14 @@ export const MENU_ITEMS: IMenuItem[] = [
         label: 'Dashboard', 
         route: '/app/dashboard', 
         icon: 'home',
-        type: 'anchor'
+        type: 'link'
     },
     { 
         id: 1, 
         label: 'Adicionar Registro', 
         icon: 'person_add',
-        type: 'button',
-        options: [
+        type: 'submenu',
+        children: [
             {
                 label: 'Cadastrar Paciente',
                 route: '/app/pacientes/novo',
@@ -29,13 +29,13 @@ export const MENU_ITEMS: IMenuItem[] = [
         label: 'Agendar Consulta', 
         route: '/app/agendamento', 
         icon: 'add_circle',
-        type: 'anchor'
+        type: 'link'
     },
     { 
         id: 3, 
         label: 'Gerenciar Pacientes/Consultas', 
         route: '/app/gerenciamento', 
         icon: 'list',
-        type: 'anchor'
+        type: 'link'
     }
 ] as const;
