@@ -12,7 +12,7 @@ import { ToastService } from '../../../../../../core/services/toast/toast.servic
 import { cpfMismatchValidator } from '../../../../../../core/validators/cpf-mismatch.validator';
 import { REGEX } from '../../../../../../core/constants/regex.constant';
 import { SEX_OPTIONS } from '../../../../../../core/constants/sex-options.constant';
-import { REGISTRATION_OPTIONS } from '../../../../../../core/constants/registration-options.constant';
+import { PROFESSIONAL_REGISTRATION_OPTIONS } from '../../../../../../core/constants/professional-registration-options.constant';
 import { CreateProfessionalDTO } from '../../dtos/create-professional.dto';
 
 
@@ -38,7 +38,7 @@ export class ProfessionalRegistrationFormComponent implements OnInit {
   professionalForm!: FormGroup;
   isLoading = true;
   readonly sexOptions = SEX_OPTIONS;
-  readonly registrationOptions = REGISTRATION_OPTIONS;
+  readonly professionalRegistrationOptions = PROFESSIONAL_REGISTRATION_OPTIONS;
   
   private readonly formBuilder = inject(FormBuilder);
   private readonly toast = inject(ToastService);

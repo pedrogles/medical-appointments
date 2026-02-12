@@ -150,7 +150,7 @@
                 <mat-form-field class="form-field">
                     <mat-label>Conselho Profissional</mat-label>
                     <mat-select formControlName="registrationType">
-                        @for(registration of registrationOptions; track registration.value) {
+                        @for(registration of professionalRegistrationOptions; track registration.value) {
                             <mat-option [value]="registration.value">
                                 {{ registration.label }}
                             </mat-option>

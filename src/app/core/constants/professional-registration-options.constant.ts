@@ -1,4 +1,4 @@
-export const REGISTRATION_OPTIONS = [
+export const PROFESSIONAL_REGISTRATION_OPTIONS = [
   { label: 'CRM', value: 'CRM' },
   { label: 'CRO', value: 'CRO' },
   { label: 'CRP', value: 'CRP' },
