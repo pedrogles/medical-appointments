@@ -1,29 +1,8 @@
 import { ProfessionalRegistrationType } from "../types/professionalRegistration.type";
-import { SexType } from "../types/sex.type";
+import { IPerson } from "./person.interface";
 
-export interface IProfessional {
+export interface IProfessional extends IPerson{
   readonly id: string;
-
-  // Dados pessoais
-  name: string;
-  birth: string;
-  cpf: string;
-  rg: string;
-  sex: SexType;
-
-  // Contato
-  phone: string;
-  email: string;
-
-  // Endereço
-  address: {
-    street: string;
-    number: string;
-    district: string;
-    city: string;
-    state: string;
-    zipCode: string;
-  };
 
   // Dados profissionais
   specialty: string;
@@ -32,6 +11,6 @@ export interface IProfessional {
 
   // Controle
   isActive: boolean;
-//   createdAt?: string;
-//   updatedAt?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
