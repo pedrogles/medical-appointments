@@ -27,7 +27,7 @@ export const MENU_ITEMS: IMenuItem[] = [
     { 
         id: 2, 
         label: 'Agendar Consulta', 
-        route: '/app/agendamento', 
+        route: '/app/agendamentos/novo', 
         icon: 'add_circle',
         type: 'link'
     },
