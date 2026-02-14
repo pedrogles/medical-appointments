@@ -24,7 +24,7 @@
                 <!-- Appointment Date -->
                 <mat-form-field class="form-field">
                     <mat-label>Data da consulta</mat-label>
-                    <input matInput formControlName="date" type="text" placeholder="DD/MM/AAAA" mask="00/00/0000" [dropSpecialCharacters]="false">
+                    <input matInput formControlName="date" type="date">
                     <mat-error *ngIf="formControls.date.errors?.['required']">
                         O campo data da consulta é obrigatório.
                     </mat-error>  

@@ -76,7 +76,7 @@ export class AppointmentFormComponent implements OnInit {
 
   onSubmit(): void {
     this.isLoading = true;
-    // const appointmentData = this.buildCreateAppointmentDTO();
+    // const appointmentData: CreateAppointmentDTO = this.buildCreateAppointmentDTO();
     setTimeout(() => {
       this.toast.show(`Consulta agendada com sucesso!`, 'success');
       this.isLoading = false;
@@ -95,20 +95,7 @@ export class AppointmentFormComponent implements OnInit {
   // }
 
   // private startDateTime(date: string, hour: string): string {
-  //   if (!date || !hour) {
-  //     this.toast.show(`Data ou hora não informada`, 'error');
-  //     throw new Error('Data ou hora não informada');
-  //   }
-
-  //   const [day, month, year] = date.split('/');
-
-  //   if (!day || !month || !year) {
-  //     this.toast.show(`Formato de data inválido`, 'error');
-  //     throw new Error('Formato de data inválido');
-  //   }
-
-  //   const isoString = `${year}-${month}-${day}T${hour}:00`;
-
+  //   const isoString = `${date}T${hour}:00`;
   //   const parsed = new Date(isoString);
 
   //   if (isNaN(parsed.getTime())) {
