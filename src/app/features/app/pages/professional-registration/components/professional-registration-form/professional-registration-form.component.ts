@@ -80,9 +80,17 @@ export class ProfessionalRegistrationFormComponent implements OnInit {
   
     onSubmit(): void {
       this.isLoading = true;
-      
+      const professionalData: CreateProfessionalDTO = this.buildCreateProfessionalDTO();
+      setTimeout(() => {
+        this.toast.show(`Profissional "${professionalData.name}" cadastrado(a) com sucesso!`, 'success');
+        this.isLoading = false;
+        this.professionalForm.reset();
+      }, 2000); 
+    }
+
+    private buildCreateProfessionalDTO(): CreateProfessionalDTO {
       const formValue = this.professionalForm.getRawValue();
-      const professionalData: CreateProfessionalDTO = {
+      return {
         name: formValue.personalData.name,
         birth: formValue.personalData.birth,
         cpf: formValue.personalData.cpf,
@@ -102,12 +110,7 @@ export class ProfessionalRegistrationFormComponent implements OnInit {
         registration_type:  formValue.professionalData.registrationType,
         registration_number: formValue.professionalData.registrationNumber,
         registration_jurisdiction: formValue.professionalData.registrationJurisdiction
-      };
-      setTimeout(() => {
-        this.toast.show(`Profissional "${professionalData.name}" cadastrado(a) com sucesso!`, 'success');
-        this.isLoading = false;
-        this.professionalForm.reset();
-      }, 2000); 
+      }
     }
   
     onZipCodeChange(zipCode: Event): void {

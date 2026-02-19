@@ -71,9 +71,17 @@ export class PatientRegistrationFormComponent implements OnInit {
 
   onSubmit(): void {
     this.isLoading = true;
+    const patientData: CreatePatientDTO = this.buildCreatePatientDTO();
+    setTimeout(() => {
+      this.toast.show(`Paciente "${patientData.name}" cadastrado(a) com sucesso!`, 'success');
+      this.isLoading = false;
+      this.patientForm.reset();
+    }, 2000); 
+  }
 
+  private buildCreatePatientDTO(): CreatePatientDTO {
     const formValue = this.patientForm.getRawValue();
-    const patientData: CreatePatientDTO = {
+    return {
       name: formValue.personalData.name,
       birth: formValue.personalData.birth,
       cpf: formValue.personalData.cpf,
@@ -82,20 +90,14 @@ export class PatientRegistrationFormComponent implements OnInit {
       phone: formValue.personalData.phone,
       email: formValue.personalData.email,
       address: {
-          street: formValue.address.street,
-          number: formValue.address.number,
-          district: formValue.address.district,
-          city: formValue.address.city,
-          state: formValue.address.state,
-          zip_code: formValue.address.zipCode,
+        street: formValue.address.street,
+        number: formValue.address.number,
+        district: formValue.address.district,
+        city: formValue.address.city,
+        state: formValue.address.state,
+        zip_code: formValue.address.zipCode,
       }
     };
-    setTimeout(() => {
-      this.toast.show(`Paciente "${patientData.name}" cadastrado(a) com sucesso!`, 'success');
-      this.isLoading = false;
-      this.patientForm.reset();
-      console.log(patientData);
-    }, 2000); 
   }
 
   onZipCodeChange(zipCode: Event): void {
