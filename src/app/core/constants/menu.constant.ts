@@ -2,40 +2,39 @@ import { IMenuItem } from "../interfaces/menu.interface";
 
 export const MENU_ITEMS: IMenuItem[] = [
     { 
-        id: 0, 
+        key: 'dashboard',
         label: 'Dashboard', 
         route: '/app/dashboard', 
         icon: 'home',
         type: 'link'
     },
     { 
-        id: 1, 
-        label: 'Adicionar Registro', 
-        icon: 'person_add',
+        key: 'cadastros',
+        label: 'Cadastros', 
+        icon: 'group_add',
         type: 'submenu',
         children: [
             {
-                label: 'Cadastrar Paciente',
+                label: 'Novo Paciente',
                 route: '/app/pacientes/novo',
             },
             {
-                label: 'Cadastrar Profissional',
+                label: 'Novo Profissional',
                 route: '/app/profissionais/novo',
             }
         ]
     },
     { 
-        id: 2, 
-        label: 'Agendar Consulta', 
+        key: 'agendamentos',
+        label: 'Agendamentos', 
         route: '/app/agendamentos/novo', 
-        icon: 'add_circle',
+        icon: 'event',
         type: 'link'
     },
     { 
-        id: 3, 
-        label: 'Gerenciar Pacientes/Consultas', 
-        route: '/app/gerenciamento', 
-        icon: 'list',
-        type: 'link'
+        key: 'gestao',
+        label: 'Gestão', 
+        icon: 'admin_panel_settings',
+        type: 'submenu',
     }
 ] as const;

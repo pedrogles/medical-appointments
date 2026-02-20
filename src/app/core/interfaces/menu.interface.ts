@@ -1,7 +1,7 @@
 import { MenuItemType, MenuSubItem } from '../types/menu.type';
 
 export interface IMenuItem {
-    id: number;
+    key: string;
     label: string;
     route?: string;
     icon?: string;

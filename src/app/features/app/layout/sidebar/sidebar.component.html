@@ -7,7 +7,7 @@
         <mat-divider></mat-divider>
         <nav class="menu">
             <ul class="menu-list">
-                @for(item of menuItems; track item.id) {
+                @for(item of menuItems; track item.key) {
                     <li>
                         @if(item.type === 'link') {
                             <a class="menu-item" [routerLink]="item.route">
