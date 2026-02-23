@@ -4,7 +4,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth/auth.service';
@@ -14,6 +13,7 @@ import { REGEX } from '../../../../core/constants/regex.constant';
 import { passwordMatchValidator } from '../../../../core/validators/password-match.validator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RegisterDTO } from '../../dtos/register.dto';
+import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 
 @Component({
   selector: 'medical-register',

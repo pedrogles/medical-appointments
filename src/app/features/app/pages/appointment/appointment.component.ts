@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AppLayoutComponent } from '../../layout/app-layout/app-layout.component';
 import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
+import { AppLayoutComponent } from '../../../../core/layout/app-layout/app-layout.component';
 
 @Component({
   selector: 'medical-appointment',

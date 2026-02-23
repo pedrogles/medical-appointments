@@ -4,15 +4,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth/auth.service';
 import { REGEX } from '../../../../core/constants/regex.constant';
 import { finalize } from 'rxjs';
-
 import { ToastService } from '../../../../core/services/toast/toast.service';
 import { LoginDTO } from '../../dtos/login.dto';
+import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 
 @Component({
   selector: 'medical-login',

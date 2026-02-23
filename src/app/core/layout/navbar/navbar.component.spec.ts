@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
-import { AuthService } from '../../../auth/service/auth/auth.service';
 import { of } from 'rxjs';
 import { provideRouter } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { MENU_ITEMS } from '../../../../core/constants/menu.constant';
+import { AuthService } from '../../../features/auth/service/auth/auth.service';
+import { MENU_ITEMS } from '../../constants/menu.constant';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;

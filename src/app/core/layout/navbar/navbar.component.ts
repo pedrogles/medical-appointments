@@ -5,9 +5,9 @@ import { Router, RouterModule } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../../../auth/service/auth/auth.service';
-import { IMenuItem } from '../../../../core/interfaces/menu.interface';
-import { MENU_ITEMS } from '../../../../core/constants/menu.constant';
+import { IMenuItem } from '../../interfaces/menu.interface';
+import { MENU_ITEMS } from '../../constants/menu.constant';
+import { AuthService } from '../../../features/auth/service/auth/auth.service';
 
 @Component({
   selector: 'medical-navbar',
