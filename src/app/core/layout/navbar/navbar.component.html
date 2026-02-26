@@ -6,7 +6,7 @@
             aria-hidden="false" 
             aria-label="Fechar menu" 
             fontIcon="close" 
-            (click)="onChangeMenuState()">
+            (click)="toggleMenu()">
         </mat-icon>
     } @else {
         <mat-icon 
@@ -14,7 +14,7 @@
             aria-hidden="false" 
             aria-label="Abrir menu" 
             fontIcon="menu" 
-            (click)="onChangeMenuState()">
+            (click)="toggleMenu()">
         </mat-icon>
     }
 </header>
@@ -24,7 +24,7 @@
         @for(item of menuItems; track item.key) {
             <li>
                 @if(item.type === 'link') {
-                    <a class="menu-item" [routerLink]="item.route">
+                    <a class="menu-item" [routerLink]="item.route" (click)="closeMenu()">
                         <mat-icon aria-hidden="true" fontIcon="{{item.icon}}"></mat-icon>
                         {{ item.label }}
                     </a>
@@ -36,7 +36,7 @@
                     </button>
                     <mat-menu #menu="matMenu" class="mat-menu-custom-navbar">
                         @for(option of item.children; track option.label) {
-                            <button mat-menu-item [routerLink]="option.route">
+                            <button mat-menu-item [routerLink]="option.route" (click)="closeMenu()">
                                 {{option.label}}
                             </button>
                         }

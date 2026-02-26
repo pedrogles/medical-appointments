@@ -38,7 +38,11 @@ export class NavbarComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
-  onChangeMenuState(): void {
+  closeMenu(): void {
+    this.isMenu = false;
+  }
+  
+  toggleMenu(): void {
     this.isMenu = !this.isMenu;
   };
 

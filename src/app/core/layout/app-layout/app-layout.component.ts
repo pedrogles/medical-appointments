@@ -3,16 +3,20 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Subject, takeUntil } from 'rxjs';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'medical-app-layout',
   standalone: true,
-  imports: [NavbarComponent, SidebarComponent],
+  imports: [
+    RouterOutlet, 
+    NavbarComponent, 
+    SidebarComponent
+  ],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss'
 })
 export class AppLayoutComponent implements OnInit, OnDestroy {
-  title = input.required<string>();
   isMobile!: boolean;
   
   private destroy$ = new Subject<void>();
