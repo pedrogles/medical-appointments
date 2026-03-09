@@ -13,17 +13,24 @@ import { ToastService } from '../../../../../../core/services/toast/toast.servic
 import { cpfMismatchValidator } from '../../../../../../core/validators/cpf-mismatch.validator';
 import { REGEX } from '../../../../../../core/constants/regex.constant';
 import { CreatePatientDTO } from '../../../../dtos/create-patient.dto';
+import { SexType } from '../../../../../../core/types/sex.type';
+import { PersonalDataFormType } from '../../../../../../core/types/personalDataForm.type';
+import { AddressFormType } from '../../../../../../core/types/addressForm.type';
+import { PatientService } from '../../../../services/patient.service';
+import { CepService } from '../../../../../../core/services/cep/cep.service';
+import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
+
 
 @Component({
   selector: 'medical-patient-registration-form',
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatCardModule, 
-    MatButtonModule, 
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
@@ -33,32 +40,36 @@ import { CreatePatientDTO } from '../../../../dtos/create-patient.dto';
   styleUrl: './patient-registration-form.component.scss'
 })
 export class PatientRegistrationFormComponent implements OnInit {
-  patientForm!: FormGroup;
-  isLoading = true;
+  patientForm!: FormGroup<{
+    personalData: FormGroup<PersonalDataFormType>;
+    address: FormGroup<AddressFormType>;
+  }>;
+  isLoading = false;
   readonly sexOptions = SEX_OPTIONS;
-  
+ 
   private readonly formBuilder = inject(FormBuilder);
+  private readonly patientService = inject(PatientService);
   private readonly toast = inject(ToastService);
+  private readonly cepService = inject(CepService);
 
   ngOnInit(): void {
     this.initializeForm();
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
+    this.onZipCodeChange();
   }
 
   initializeForm(): void {
-    this.patientForm = this.formBuilder.group({
-      personalData: this.formBuilder.group({
+    this.patientForm = this.formBuilder.nonNullable.group({
+      personalData: this.formBuilder.nonNullable.group({
         name: ['', [Validators.required, Validators.minLength(6)]],
         birth: ['', [Validators.required, Validators.maxLength(10)]],
         cpf: ['', [Validators.required, cpfMismatchValidator]],
         rg: ['', [Validators.required, Validators.pattern(REGEX.rg)]],
-        sex: ['', [Validators.required]],
+        sex: this.formBuilder.nonNullable.control<SexType>(
+          'male', [Validators.required]),
         phone: ['', [Validators.required, Validators.minLength(11)]],
         email: ['', [Validators.required, Validators.email]],
       }),
-      address: this.formBuilder.group({
+      address: this.formBuilder.nonNullable.group({
         number: ['', [Validators.required]],
         zipCode: ['', [Validators.required, Validators.pattern(REGEX.zipCode)]],
         street: [{ value: '', disabled: true }, [Validators.required]],
@@ -72,11 +83,18 @@ export class PatientRegistrationFormComponent implements OnInit {
   onSubmit(): void {
     this.isLoading = true;
     const patientData: CreatePatientDTO = this.buildCreatePatientDTO();
-    setTimeout(() => {
-      this.toast.show(`Paciente "${patientData.name}" cadastrado(a) com sucesso!`, 'success');
-      this.isLoading = false;
-      this.patientForm.reset();
-    }, 2000); 
+    this.patientService.create(patientData).subscribe({
+        next: (createdPatient) => {
+          this.toast.show(`Paciente "${createdPatient.name}" cadastrado(a) com sucesso!`, 'success');
+          this.patientForm.reset();
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error creating patient:', error);
+          this.toast.show('Erro ao cadastrar paciente. Por favor, tente novamente.', 'error');
+          this.isLoading = false;
+        }
+    });
   }
 
   private buildCreatePatientDTO(): CreatePatientDTO {
@@ -89,19 +107,42 @@ export class PatientRegistrationFormComponent implements OnInit {
       sex: formValue.personalData.sex,
       phone: formValue.personalData.phone,
       email: formValue.personalData.email,
-      address: {
-        street: formValue.address.street,
-        number: formValue.address.number,
-        district: formValue.address.district,
-        city: formValue.address.city,
-        state: formValue.address.state,
-        zip_code: formValue.address.zipCode,
-      }
+      street: formValue.address.street,
+      number: formValue.address.number,
+      district: formValue.address.district,
+      city: formValue.address.city,
+      state: formValue.address.state,
+      zip_code: formValue.address.zipCode,
     };
   }
 
-  onZipCodeChange(zipCode: Event): void {
+  onZipCodeChange(): void {
+    const zipCodeControl = this.addressGroup.get('zipCode');
 
+    zipCodeControl?.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      filter((zipCode: string) => REGEX.zipCode.test(zipCode)),
+      switchMap((zipCode: string) => this.cepService.getAddressByCep(Number(zipCode)))
+    ).subscribe({
+      next: (data) => {
+        this.patientForm.get('address')?.patchValue({
+          street: data.logradouro,
+          city: data.localidade,
+          district: data.bairro,
+          state: data.uf,
+          number: '',
+          zipCode: zipCodeControl.value
+        });
+      },
+      error: (error) => {
+        console.error('Erro ao buscar CEP:', error);
+        this.toast.show(
+          'Erro ao buscar endereço. Verifique o CEP.',
+          'error'
+        );
+      }
+    });
   }
 
   get personalDataGroup(): FormGroup {

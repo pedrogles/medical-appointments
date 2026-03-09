@@ -93,8 +93,7 @@
                 <!-- ZipCode -->
                 <mat-form-field class="form-field">
                     <mat-label>Cep</mat-label>
-                    <input matInput formControlName="zipCode" type="number" placeholder="Digite o seu cep..." 
-                    (change)="onZipCodeChange($event)">
+                    <input matInput formControlName="zipCode" type="number" placeholder="Digite o seu cep...">
                     <mat-error *ngIf="addressGroup.controls['zipCode'].errors?.['required']">
                         O campo cep é obrigatório.
                     </mat-error>  
