@@ -16,7 +16,7 @@ import { REGEX } from '../../../../../../core/constants/regex.constant';
 import { CreateProfessionalDTO } from '../../../../dtos/create-professional.dto';
 import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { CepService } from '../../../../../../core/services/cep/cep.service';
-import { ProfessionalService } from '../../../../services/professional/professional.service';
+import { ProfessionalService } from '../../../../services/professional.service';
 
 
 @Component({

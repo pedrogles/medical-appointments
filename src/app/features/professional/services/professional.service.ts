@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { from, map, Observable } from 'rxjs';
-import { CreateProfessionalDTO } from '../../dtos/create-professional.dto';
-import { IProfessional } from '../../../../core/interfaces/professional.interface';
-import { SupabaseService } from '../../../../core/services/supabase/supabase.service';
+import { CreateProfessionalDTO } from '../dtos/create-professional.dto';
+import { IProfessional } from '../../../core/interfaces/professional.interface';
+import { SupabaseService } from '../../../core/services/supabase/supabase.service';
 
 @Injectable({
   providedIn: 'root'
