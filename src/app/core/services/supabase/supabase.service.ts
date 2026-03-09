@@ -6,13 +6,19 @@ import { environments } from '../../../../environments/environments';
   providedIn: 'root'
 })
 export class SupabaseService {
-
   private supabase: SupabaseClient;
 
   constructor() {
     this.supabase = createClient(
       environments.supabase.url,
-      environments.supabase.anonKey
+      environments.supabase.anonKey,
+      {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+          detectSessionInUrl: false
+        }
+      }
     );
   }
 
