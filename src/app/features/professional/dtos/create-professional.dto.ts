@@ -9,14 +9,12 @@ export interface CreateProfessionalDTO {
     sex: SexType;
     phone: string;
     email: string;
-    address: {
-        street: string;
-        number: string;
-        district: string;
-        city: string;
-        state: string;
-        zip_code: string;
-    };
+    street: string;
+    number: string;
+    district: string;
+    city: string;
+    state: string;
+    zip_code: string;
     specialty: string;
     registration_type: ProfessionalRegistrationType;
     registration_jurisdiction: string;
