@@ -14,6 +14,9 @@ import { ToastService } from '../../../../../../core/services/toast/toast.servic
 import { cpfMismatchValidator } from '../../../../../../core/validators/cpf-mismatch.validator';
 import { REGEX } from '../../../../../../core/constants/regex.constant';
 import { CreateProfessionalDTO } from '../../../../dtos/create-professional.dto';
+import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
+import { CepService } from '../../../../../../core/services/cep/cep.service';
+import { ProfessionalService } from '../../../../services/professional/professional.service';
 
 
 @Component({
@@ -36,96 +39,126 @@ import { CreateProfessionalDTO } from '../../../../dtos/create-professional.dto'
 })
 export class ProfessionalRegistrationFormComponent implements OnInit {
   professionalForm!: FormGroup;
-  isLoading = true;
+  isLoading = false;
   readonly sexOptions = SEX_OPTIONS;
   readonly professionalRegistrationOptions = PROFESSIONAL_REGISTRATION_OPTIONS;
   
   private readonly formBuilder = inject(FormBuilder);
   private readonly toast = inject(ToastService);
+  private readonly cepService = inject(CepService);
+  private readonly professionalService = inject(ProfessionalService);
 
   ngOnInit(): void {
     this.initializeForm();
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
+    this.onZipCodeChange();
   }
 
   initializeForm(): void {
-      this.professionalForm = this.formBuilder.group({
-        personalData: this.formBuilder.group({
-          name: ['', [Validators.required, Validators.minLength(6)]],
-          birth: ['', [Validators.required, Validators.maxLength(10)]],
-          cpf: ['', [Validators.required, cpfMismatchValidator]],
-          rg: ['', [Validators.required, Validators.pattern(REGEX.rg)]],
-          sex: ['', [Validators.required]],
-          phone: ['', [Validators.required, Validators.minLength(11)]],
-          email: ['', [Validators.required, Validators.email]],
-        }),
-        professionalData: this.formBuilder.group({
-          specialty: ['', [Validators.required, Validators.minLength(2)]],
-          registrationType: ['', [Validators.required]],
-          registrationJurisdiction: ['', [Validators.required, Validators.minLength(2)]],
-          registrationNumber: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]]
-        }),
-        address: this.formBuilder.group({
-          number: ['', [Validators.required]],
-          zipCode: ['', [Validators.required, Validators.pattern(REGEX.zipCode)]],
-          street: [{ value: '', disabled: true }, [Validators.required]],
-          district: [{ value: '', disabled: true }, [Validators.required]],
-          city: [{ value: '', disabled: true }, [Validators.required]],
-          state: [{ value: '', disabled: true }, [Validators.required]]
-        })
-      });
-    }
+    this.professionalForm = this.formBuilder.group({
+      personalData: this.formBuilder.group({
+        name: ['', [Validators.required, Validators.minLength(6)]],
+        birth: ['', [Validators.required, Validators.maxLength(10)]],
+        cpf: ['', [Validators.required, cpfMismatchValidator]],
+        rg: ['', [Validators.required, Validators.pattern(REGEX.rg)]],
+        sex: ['', [Validators.required]],
+        phone: ['', [Validators.required, Validators.minLength(11)]],
+        email: ['', [Validators.required, Validators.email]],
+      }),
+      professionalData: this.formBuilder.group({
+        specialty: ['', [Validators.required, Validators.minLength(2)]],
+        registrationType: ['', [Validators.required]],
+        registrationJurisdiction: ['', [Validators.required, Validators.minLength(2)]],
+        registrationNumber: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]]
+      }),
+      address: this.formBuilder.group({
+        number: ['', [Validators.required]],
+        zipCode: ['', [Validators.required, Validators.pattern(REGEX.zipCode)]],
+        street: [{ value: '', disabled: true }, [Validators.required]],
+        district: [{ value: '', disabled: true }, [Validators.required]],
+        city: [{ value: '', disabled: true }, [Validators.required]],
+        state: [{ value: '', disabled: true }, [Validators.required]]
+      })
+    });
+  }
   
-    onSubmit(): void {
-      this.isLoading = true;
-      const professionalData: CreateProfessionalDTO = this.buildCreateProfessionalDTO();
-      setTimeout(() => {
-        this.toast.show(`Profissional "${professionalData.name}" cadastrado(a) com sucesso!`, 'success');
-        this.isLoading = false;
-        this.professionalForm.reset();
-      }, 2000); 
-    }
-
-    private buildCreateProfessionalDTO(): CreateProfessionalDTO {
-      const formValue = this.professionalForm.getRawValue();
-      return {
-        name: formValue.personalData.name,
-        birth: formValue.personalData.birth,
-        cpf: formValue.personalData.cpf,
-        rg: formValue.personalData.rg,
-        sex: formValue.personalData.sex,
-        phone: formValue.personalData.phone,
-        email: formValue.personalData.email,
-        address: {
-            street: formValue.address.street,
-            number: formValue.address.number,
-            district: formValue.address.district,
-            city: formValue.address.city,
-            state: formValue.address.state,
-            zip_code: formValue.address.zipCode,
+  onSubmit(): void {
+    this.isLoading = true;
+    const professionalData: CreateProfessionalDTO = this.buildCreateProfessionalDTO();
+    this.professionalService.create(professionalData).subscribe({
+        next: (createdProfessional) => {
+          this.toast.show(`Profissional "${createdProfessional.name}" cadastrado(a) com sucesso!`, 'success');
+          this.professionalForm.reset();
+          this.isLoading = false;
         },
-        specialty: formValue.professionalData.specialty,
-        registration_type:  formValue.professionalData.registrationType,
-        registration_number: formValue.professionalData.registrationNumber,
-        registration_jurisdiction: formValue.professionalData.registrationJurisdiction
-      }
-    }
-  
-    onZipCodeChange(zipCode: Event): void {
-  
-    }
-  
-    get personalDataGroup(): FormGroup {
-      return this.professionalForm.get('personalData') as FormGroup;
-    }
-    
-    get professionalDataGroup(): FormGroup {
-      return this.professionalForm.get('professionalData') as FormGroup;
-    }
+        error: (error) => {
+          console.error('Error creating professional:', error);
+          this.toast.show('Erro ao cadastrar profissional. Por favor, tente novamente.', 'error');
+          this.isLoading = false;
+        }
+    });
+  }
 
-    get addressGroup(): FormGroup {
-      return this.professionalForm.get('address') as FormGroup;
+  private buildCreateProfessionalDTO(): CreateProfessionalDTO {
+    const formValue = this.professionalForm.getRawValue();
+    return {
+      name: formValue.personalData.name,
+      birth: formValue.personalData.birth,
+      cpf: formValue.personalData.cpf,
+      rg: formValue.personalData.rg,
+      sex: formValue.personalData.sex,
+      phone: formValue.personalData.phone,
+      email: formValue.personalData.email,
+      street: formValue.address.street,
+      number: formValue.address.number,
+      district: formValue.address.district,
+      city: formValue.address.city,
+      state: formValue.address.state,
+      zip_code: formValue.address.zipCode,
+      specialty: formValue.professionalData.specialty,
+      registration_type:  formValue.professionalData.registrationType,
+      registration_number: formValue.professionalData.registrationNumber,
+      registration_jurisdiction: formValue.professionalData.registrationJurisdiction
     }
+  }
+
+  onZipCodeChange(): void {
+    const zipCodeControl = this.addressGroup.get('zipCode');
+
+    zipCodeControl?.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      filter((zipCode: string) => REGEX.zipCode.test(zipCode)),
+      switchMap((zipCode: string) => this.cepService.getAddressByCep(Number(zipCode)))
+    ).subscribe({
+      next: (data) => {
+        this.professionalForm.get('address')?.patchValue({
+          street: data.logradouro,
+          city: data.localidade,
+          district: data.bairro,
+          state: data.uf,
+          number: '',
+          zipCode: zipCodeControl.value
+        });
+      },
+      error: (error) => {
+        console.error('Erro ao buscar CEP:', error);
+        this.toast.show(
+          'Erro ao buscar endereço. Verifique o CEP.',
+          'error'
+        );
+      }
+    });
+  }
+
+  get personalDataGroup(): FormGroup {
+    return this.professionalForm.get('personalData') as FormGroup;
+  }
+  
+  get professionalDataGroup(): FormGroup {
+    return this.professionalForm.get('professionalData') as FormGroup;
+  }
+
+  get addressGroup(): FormGroup {
+    return this.professionalForm.get('address') as FormGroup;
+  }
 }
