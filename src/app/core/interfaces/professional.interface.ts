@@ -8,6 +8,7 @@ export interface IProfessional extends IPerson{
   specialty: string;
   registrationType: ProfessionalRegistrationType;
   registrationNumber: string;
+  registrationJurisdiction: string;
 
   // Controle
   isActive: boolean;
