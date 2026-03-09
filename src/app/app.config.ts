@@ -8,6 +8,7 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environments } from '../environments/environments';
 import { provideNgxMask } from 'ngx-mask';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideFirebaseApp(() => initializeApp(environments.firebaseConfig)),
     provideAuth(() => getAuth()),
-    provideNgxMask()
+    provideNgxMask(),
+    provideHttpClient()
   ]
 };
