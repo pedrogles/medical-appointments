@@ -17,6 +17,11 @@ import { CreateProfessionalDTO } from '../../../../dtos/create-professional.dto'
 import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { CepService } from '../../../../../../core/services/cep/cep.service';
 import { ProfessionalService } from '../../../../services/professional.service';
+import { PersonalDataFormType } from '../../../../../../core/types/personalDataForm.type';
+import { AddressFormType } from '../../../../../../core/types/addressForm.type';
+import { ProfessionalDataFormType } from '../../../../../../core/types/professionalDataForm.type';
+import { SexType } from '../../../../../../core/types/sex.type';
+import { ProfessionalRegistrationType } from '../../../../../../core/types/professionalRegistration.type';
 
 
 @Component({
@@ -38,7 +43,11 @@ import { ProfessionalService } from '../../../../services/professional.service';
   styleUrl: './professional-registration-form.component.scss'
 })
 export class ProfessionalRegistrationFormComponent implements OnInit {
-  professionalForm!: FormGroup;
+  professionalForm!: FormGroup<{
+    personalData: FormGroup<PersonalDataFormType>;
+    professionalData: FormGroup<ProfessionalDataFormType>;
+    address: FormGroup<AddressFormType>;
+  }>;
   isLoading = false;
   readonly sexOptions = SEX_OPTIONS;
   readonly professionalRegistrationOptions = PROFESSIONAL_REGISTRATION_OPTIONS;
@@ -54,23 +63,25 @@ export class ProfessionalRegistrationFormComponent implements OnInit {
   }
 
   initializeForm(): void {
-    this.professionalForm = this.formBuilder.group({
-      personalData: this.formBuilder.group({
+    this.professionalForm = this.formBuilder.nonNullable.group({
+      personalData: this.formBuilder.nonNullable.group({
         name: ['', [Validators.required, Validators.minLength(6)]],
         birth: ['', [Validators.required, Validators.maxLength(10)]],
         cpf: ['', [Validators.required, cpfMismatchValidator]],
         rg: ['', [Validators.required, Validators.pattern(REGEX.rg)]],
-        sex: ['', [Validators.required]],
+        sex: this.formBuilder.nonNullable.control<SexType>(
+          'male', [Validators.required]),
         phone: ['', [Validators.required, Validators.minLength(11)]],
         email: ['', [Validators.required, Validators.email]],
       }),
-      professionalData: this.formBuilder.group({
+      professionalData: this.formBuilder.nonNullable.group({
         specialty: ['', [Validators.required, Validators.minLength(2)]],
-        registrationType: ['', [Validators.required]],
+        registrationType: this.formBuilder.nonNullable.control<ProfessionalRegistrationType>(
+          'CRM', [Validators.required]),
         registrationJurisdiction: ['', [Validators.required, Validators.minLength(2)]],
         registrationNumber: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]]
       }),
-      address: this.formBuilder.group({
+      address: this.formBuilder.nonNullable.group({
         number: ['', [Validators.required]],
         zipCode: ['', [Validators.required, Validators.pattern(REGEX.zipCode)]],
         street: [{ value: '', disabled: true }, [Validators.required]],
