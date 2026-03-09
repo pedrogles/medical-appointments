@@ -8,12 +8,10 @@ export interface CreatePatientDTO {
     sex: SexType;
     phone: string;
     email: string;
-    address: {
-        street: string;
-        number: string;
-        district: string;
-        city: string;
-        state: string;
-        zip_code: string;
-    }
+    street: string;
+    number: string;
+    district: string;
+    city: string;
+    state: string;
+    zip_code: string;
 }
