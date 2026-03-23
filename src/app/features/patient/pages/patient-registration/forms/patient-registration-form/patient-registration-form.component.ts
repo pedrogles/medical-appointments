@@ -54,10 +54,10 @@ export class PatientRegistrationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
-    this.onZipCodeChange();
+    this.listenZipCodeChanges();
   }
 
-  initializeForm(): void {
+  private initializeForm(): void {
     this.patientForm = this.formBuilder.nonNullable.group({
       personalData: this.formBuilder.nonNullable.group({
         name: ['', [Validators.required, Validators.minLength(6)]],
@@ -116,7 +116,7 @@ export class PatientRegistrationFormComponent implements OnInit {
     };
   }
 
-  onZipCodeChange(): void {
+  private listenZipCodeChanges(): void {
     const zipCodeControl = this.addressGroup.get('zipCode');
 
     zipCodeControl?.valueChanges.pipe(
