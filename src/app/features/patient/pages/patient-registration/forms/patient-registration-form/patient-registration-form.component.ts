@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -19,6 +19,7 @@ import { AddressFormType } from '../../../../../../core/types/addressForm.type';
 import { PatientService } from '../../../../services/patient.service';
 import { CepService } from '../../../../../../core/services/cep/cep.service';
 import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -51,6 +52,8 @@ export class PatientRegistrationFormComponent implements OnInit {
   private readonly patientService = inject(PatientService);
   private readonly toast = inject(ToastService);
   private readonly cepService = inject(CepService);
+  
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this.initializeForm();
@@ -123,7 +126,8 @@ export class PatientRegistrationFormComponent implements OnInit {
       debounceTime(500),
       distinctUntilChanged(),
       filter((zipCode: string) => REGEX.zipCode.test(zipCode)),
-      switchMap((zipCode: string) => this.cepService.getAddressByCep(Number(zipCode)))
+      switchMap((zipCode: string) => this.cepService.getAddressByCep(Number(zipCode))),
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe({
       next: (data) => {
         this.patientForm.get('address')?.patchValue({
