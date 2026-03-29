@@ -3,7 +3,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth/auth.service';
@@ -12,6 +12,7 @@ import { finalize } from 'rxjs';
 import { ToastService } from '../../../../core/services/toast/toast.service';
 import { LoginDTO } from '../../dtos/login.dto';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
+import { LoginFormType } from '../../../appointment/types/login.type';
 
 @Component({
   selector: 'medical-login',
@@ -36,9 +37,9 @@ export class LoginComponent {
   private readonly toastService = inject(ToastService);
   
   loading: boolean = false;
-  loginForm = this.formBuilder.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.pattern(REGEX.password)]]
+  loginForm = this.formBuilder.nonNullable.group<LoginFormType>({
+    email: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
+    password: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern(REGEX.password)] })
   })
 
   handleLogin(): void {
