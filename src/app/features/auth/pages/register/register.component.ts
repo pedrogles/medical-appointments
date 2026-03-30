@@ -41,11 +41,15 @@ export class RegisterComponent {
 
   loading = false;
 
-  registerForm = this.formBuilder.nonNullable.group<RegisterFormType>({
-    username: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.minLength(4)] }),
-    email: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
-    password: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern(REGEX.password)] }),
-    confirmPassword: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] })
+  registerForm = this.formBuilder.group<RegisterFormType>({
+    username: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required, Validators.minLength(4)] }),
+    email: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required, Validators.email] }),
+    password: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required, Validators.pattern(REGEX.password)] }),
+    confirmPassword: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required] })
   }, { validators: passwordMatchValidator('password', 'confirmPassword') });
 
   handleRegister(): void {

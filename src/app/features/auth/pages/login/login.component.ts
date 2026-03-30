@@ -37,9 +37,11 @@ export class LoginComponent {
   private readonly toastService = inject(ToastService);
   
   loading: boolean = false;
-  loginForm = this.formBuilder.nonNullable.group<LoginFormType>({
-    email: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
-    password: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.pattern(REGEX.password)] })
+  loginForm = this.formBuilder.group<LoginFormType>({
+    email: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required, Validators.email] }),
+    password: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required, Validators.pattern(REGEX.password)] })
   })
 
   handleLogin(): void {
