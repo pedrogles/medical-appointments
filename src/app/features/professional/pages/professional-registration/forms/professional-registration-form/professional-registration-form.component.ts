@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -66,31 +66,46 @@ export class ProfessionalRegistrationFormComponent implements OnInit {
   }
 
   private initializeForm(): void {
-    this.professionalForm = this.formBuilder.nonNullable.group({
-      personalData: this.formBuilder.nonNullable.group({
-        name: ['', [Validators.required, Validators.minLength(6)]],
-        birth: ['', [Validators.required, Validators.maxLength(10)]],
-        cpf: ['', [Validators.required, cpfMismatchValidator]],
-        rg: ['', [Validators.required, Validators.pattern(REGEX.rg)]],
-        sex: this.formBuilder.nonNullable.control<SexType>(
-          'male', [Validators.required]),
-        phone: ['', [Validators.required, Validators.minLength(11)]],
-        email: ['', [Validators.required, Validators.email]],
+    this.professionalForm = this.formBuilder.group({
+      personalData: this.formBuilder.group<PersonalDataFormType>({
+        name: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, Validators.minLength(2)] }),
+        birth: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, Validators.maxLength(10)] }),
+        cpf: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, cpfMismatchValidator] }),
+        rg: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, Validators.pattern(REGEX.rg)] }),
+        sex: new FormControl<SexType>('male', 
+          { nonNullable: true, validators: [Validators.required] }),
+        phone: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, Validators.minLength(11)] }),
+        email: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, Validators.email] }),
       }),
-      professionalData: this.formBuilder.nonNullable.group({
-        specialty: ['', [Validators.required, Validators.minLength(2)]],
-        registrationType: this.formBuilder.nonNullable.control<ProfessionalRegistrationType>(
-          'CRM', [Validators.required]),
-        registrationJurisdiction: ['', [Validators.required, Validators.minLength(2)]],
-        registrationNumber: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]]
+      professionalData: this.formBuilder.group<ProfessionalDataFormType>({
+        specialty: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, Validators.minLength(2)] }),
+        registrationType: new FormControl<ProfessionalRegistrationType>('CRM', 
+          { nonNullable: true, validators: [Validators.required] }),
+        registrationJurisdiction: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, Validators.minLength(2)] }),
+        registrationNumber: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, Validators.minLength(1), Validators.maxLength(10)] })
       }),
-      address: this.formBuilder.nonNullable.group({
-        number: ['', [Validators.required]],
-        zipCode: ['', [Validators.required, Validators.pattern(REGEX.zipCode)]],
-        street: [{ value: '', disabled: true }, [Validators.required]],
-        district: [{ value: '', disabled: true }, [Validators.required]],
-        city: [{ value: '', disabled: true }, [Validators.required]],
-        state: [{ value: '', disabled: true }, [Validators.required]]
+      address: this.formBuilder.group<AddressFormType>({
+        number: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required] }),
+        zipCode: new FormControl<string>('', 
+          { nonNullable: true, validators: [Validators.required, Validators.pattern(REGEX.zipCode)] }),
+        street: new FormControl<string>({ value: '', disabled: true }, 
+          { nonNullable: true, validators: [Validators.required] }),
+        district: new FormControl<string>({ value: '', disabled: true }, 
+          { nonNullable: true, validators: [Validators.required] }),
+        city: new FormControl<string>({ value: '', disabled: true }, 
+          { nonNullable: true, validators: [Validators.required] }),
+        state: new FormControl<string>({ value: '', disabled: true }, 
+          { nonNullable: true, validators: [Validators.required] })
       })
     });
   }
