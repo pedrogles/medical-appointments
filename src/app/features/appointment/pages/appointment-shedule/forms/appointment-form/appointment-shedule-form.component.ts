@@ -89,9 +89,12 @@ export class AppointmentSheduleFormComponent implements OnInit {
     this.appointmentForm = this.formBuilder.group<AppointmentFormType>({
       patient: new FormControl<IPatient | null>(null, Validators.required),
       professional: new FormControl<IProfessional | null>(null, Validators.required),
-      date: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-      hour: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-      notes: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(500)] })
+      date: new FormControl<string>('', 
+        { nonNullable: true, validators: [Validators.required] }),
+      hour: new FormControl<string>('', 
+        { nonNullable: true, validators: [Validators.required] }),
+      notes: new FormControl<string>('', 
+        { nonNullable: true, validators: [Validators.required, Validators.maxLength(500)] })
     });
   }
 
