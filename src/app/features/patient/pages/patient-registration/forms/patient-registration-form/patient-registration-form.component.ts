@@ -83,13 +83,13 @@ export class PatientRegistrationFormComponent implements OnInit {
           { nonNullable: true, validators: [Validators.required] }),
         zipCode: new FormControl<string>('', 
           { nonNullable: true, validators: [Validators.required, Validators.pattern(REGEX.zipCode)] }),
-        street: new FormControl<string>('', 
+        street: new FormControl<string>({ value: '', disabled: true }, 
           { nonNullable: true, validators: [Validators.required] }),
-        district: new FormControl<string>('', 
+        district: new FormControl<string>({ value: '', disabled: true }, 
           { nonNullable: true, validators: [Validators.required] }),
-        city: new FormControl<string>('', 
+        city: new FormControl<string>({ value: '', disabled: true }, 
           { nonNullable: true, validators: [Validators.required] }),
-        state: new FormControl<string>('', 
+        state: new FormControl<string>({ value: '', disabled: true }, 
           { nonNullable: true, validators: [Validators.required] })
       })
     });
