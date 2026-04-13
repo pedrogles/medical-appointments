@@ -1,25 +1,42 @@
-<div class="appointment-review form-field">
-    <h3 class="review-title">Resumo da Consulta</h3>
-    <div class="review-grid">
-        <div class="review-item">
-            <span class="value">Paciente: {{ appointmentReview().patientName }}</span>
-            <span class="sub">CPF: {{ appointmentReview().patientCPF }}</span>
-        </div>
-
-        <div class="review-item">
-            <span class="value">Profissional: {{ appointmentReview().professionalName }}</span>
-            <span class="sub">Especialidade: {{ appointmentReview().professionalSpecialty }}</span>
-        </div>
-
-        <div class="review-item">
-            <span class="value">Data: {{ appointmentReview().date }}</span>
-        </div>
-
-        <div class="review-item">
-            <span class="value">Horário: {{ appointmentReview().time }}</span>
-        </div>
-        <div class="review-notes">
-            <span class="value">Notas: {{ appointmentReview().notes }}</span>
-        </div>
+<h2 mat-dialog-title>Confirmar Agendamento</h2>
+<mat-dialog-content>
+    <div class="review-item">
+        <p class="info">
+            Paciente: 
+            <span class="value"> {{ appointmentReviewData.patientName }} </span>
+        </p>
+        <p class="sub">
+            CPF: {{ appointmentReviewData.patientCPF }}
+        </p>
     </div>
-</div>
+    <mat-divider></mat-divider>
+    <div class="review-item">
+        <p class="info">
+            Profissional: 
+            <span class="value"> {{ appointmentReviewData.professionalName }} </span>
+        </p>
+        <p class="sub">
+            Especialidade: {{ appointmentReviewData.professionalSpecialty }}
+        </p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="review-item">
+        <p class="info">
+            Data: 
+            <span class="value-default-color"> {{ appointmentReviewData.date }} </span>
+        </p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="review-item">
+        <p class="info">
+            Horário: 
+            <span class="value-default-color"> {{ appointmentReviewData.time }} </span>
+        </p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="review-actions">
+    <button class="cancel-btn" mat-button (click)="cancel()">Voltar</button>
+    <button class="confirm-btn" mat-button (click)="confirm()" cdkFocusInitial>Agendar</button>
+  </div>
+</mat-dialog-actions>

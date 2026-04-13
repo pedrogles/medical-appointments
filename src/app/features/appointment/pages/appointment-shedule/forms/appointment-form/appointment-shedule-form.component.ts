@@ -20,6 +20,7 @@ import { ProfessionalService } from '../../../../../professional/services/profes
 import { IPatient } from '../../../../../../core/interfaces/patient.interface';
 import { IProfessional } from '../../../../../../core/interfaces/professional.interface';
 import { AppointmentFormType } from '../../../../../../core/types/appointmentForm.type';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'medical-appointment-shedule-form',
@@ -73,12 +74,13 @@ export class AppointmentSheduleFormComponent implements OnInit {
     { label: '19:00', value: '19:00', disabled: true }, 
     { label: '20:00', value: '20:00', disabled: true }
   ];
-    
+
   private readonly formBuilder = inject(FormBuilder);
   private readonly toast = inject(ToastService);
   private readonly appointmentService = inject(AppointmentService);
   private readonly patientService = inject(PatientService);
   private readonly professionalService = inject(ProfessionalService);
+  private readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.initializeForm();
@@ -124,6 +126,16 @@ export class AppointmentSheduleFormComponent implements OnInit {
         }
       });
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AppointmentReviewComponent, {
+      data: this.appointmentReviewData
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) this.onSubmit();
+    });
   }
 
   private buildCreateAppointmentDTO(): CreateAppointmentDTO {
@@ -203,11 +215,25 @@ export class AppointmentSheduleFormComponent implements OnInit {
       const form = this.appointmentForm.getRawValue();
       this.appointmentReviewData = { 
         ...this.appointmentReviewData,
-        date: form.date,
+        date: this.formatDate(form.date),
         time: form.hour,
         notes: form.notes
       };
     });
+  }
+
+  private formatDate(date: string | Date | null | undefined): string {
+    if (!date) return '';
+
+    const parsedDate = new Date(date);
+
+    if (isNaN(parsedDate.getTime())) return '';
+
+    return new Intl.DateTimeFormat('pt-BR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }).format(parsedDate);
   }
 
   selectPatient(patient: IPatient): void {

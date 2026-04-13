@@ -1,7 +1,7 @@
 @if(isLoading) {
     <mat-spinner class="spinner" diameter="20"></mat-spinner>
 } @else {
-    <form [formGroup]="appointmentForm" class="appointment-shedule-form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="appointmentForm" class="appointment-shedule-form" (ngSubmit)="openDialog()">
         <fieldset>
             <legend>Dados Pessoais</legend>
             <div class="inputs">
@@ -89,9 +89,6 @@
                     </mat-error>  
                 </mat-form-field>
             </div>
-        </fieldset>
-        <fieldset>
-            <medical-appointment-review [appointmentReview]="appointmentReviewData"></medical-appointment-review>
         </fieldset>
         <button mat-flat-button type="submit" class="btn-submit" [disabled]="appointmentForm.invalid">
             Agendar Consulta

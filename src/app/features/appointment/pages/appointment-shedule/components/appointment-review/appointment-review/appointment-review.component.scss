@@ -1,35 +1,63 @@
-.appointment-review {
+.review-title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-500);
+    color: var(--primary);
+    padding: .5rem 0;
+}
+.review-item {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem 1rem;
-    border-bottom: #44474e solid 1px;
-    border-radius:  4px 4px 0 0;
-    background: #e0e2ec;
-    .review-title {
+    flex-direction: column; 
+    padding: .5rem;
+    .info {
         font-size: var(--text-base);
+        color: var(--primary-hover);
         font-weight: var(--weight-500);
-        color: var(--text-primary);
+        .value {
+            font-size: var(--text-base);
+            font-weight: var(--weight-400);
+            color: var(--primary);
+        }
+        .value-default-color {
+            font-size: var(--text-base);
+            font-weight: var(--weight-400);
+            color: var(--text-secondary);
+        }
     }
     
-    .review-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        .review-item {
-            display: flex;
-            flex-direction: column;
-            .value {
-                font-size: var(--text-sm);
-            }
-            
-            .sub {
-                font-size: var(--text-xs);
-            }
-        }
-        .review-notes .value {
-                font-size: var(--text-sm);
-            }
+    .sub {
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
     }
 }
-
+.review-notes {
+    padding: .5rem 0;
+    .value {
+        font-size: var(--text-base);
+        font-weight: var(--weight-400);
+    }
+}
+.review-actions {
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+    .cancel-btn {
+        background-color: var(--bg-surface);
+        color: var(--text-primary);
+        padding: .5rem 1.2rem;
+        border: solid .1rem var(--border-color);
+        border-radius: .3rem;
+        &:hover {
+            background-color: var(--bg-default);
+        }
+    }
+    .confirm-btn {
+        background-color: var(--primary);
+        color: var(--text-terciary);
+        padding: .5rem 1.5rem;
+        border-radius: .3rem;
+        &:hover {
+            background-color: var(--primary-hover);
+            color: var(--text-terciary);
+        }
+    }
+}
