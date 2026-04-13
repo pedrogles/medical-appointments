@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { CepService } from './cep.service';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { environments } from '../../../../environments/environments';
+import { environment } from '../../../../environments/environment';
 import { ViaCepResponse } from '../../types/viaCepResponse.type';
 import { provideHttpClient } from '@angular/common/http';
 
@@ -46,7 +46,7 @@ describe('CepService', () => {
     });
 
     const req = httpMock.expectOne(
-      `${environments.viaCepUrl}/${cep}/json/`
+      `${environment.viaCepUrl}/${cep}/json/`
     );
 
     expect(req.request.method).toBe('GET');
@@ -67,7 +67,7 @@ describe('CepService', () => {
     });
 
     const req = httpMock.expectOne(
-      `${environments.viaCepUrl}/${cep}/json/`
+      `${environment.viaCepUrl}/${cep}/json/`
     );
 
     req.flush('Erro', { status: 404, statusText: 'Not Found' });
