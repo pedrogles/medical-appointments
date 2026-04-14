@@ -3,13 +3,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PatientRegistrationComponent } from './patient-registration.component';
 import { By } from '@angular/platform-browser';
 
-// 🔥 Stub do componente filho
+// Stub do componente filho
 @Component({
   selector: 'medical-patient-registration-form',
   standalone: true,
   template: ''
 })
 class PatientRegistrationFormStubComponent {}
+
+@Component({
+  selector: 'medical-page-header',
+  standalone: true,
+  template: ''
+})
+class PageHeaderStubComponent {}
 
 describe('PatientRegistrationComponent', () => {
   let component: PatientRegistrationComponent;
@@ -19,10 +26,12 @@ describe('PatientRegistrationComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PatientRegistrationComponent]
     })
-    // 🔥 sobrescreve imports do componente
     .overrideComponent(PatientRegistrationComponent, {
       set: {
-        imports: [PatientRegistrationFormStubComponent]
+        imports: [
+          PageHeaderStubComponent,
+          PatientRegistrationFormStubComponent
+        ]
       }
     })
     .compileComponents();
@@ -32,9 +41,6 @@ describe('PatientRegistrationComponent', () => {
     fixture.detectChanges();
   });
 
-  // =========================
-  // BASICS
-  // =========================
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -48,5 +54,13 @@ describe('PatientRegistrationComponent', () => {
     );
 
     expect(form).toBeTruthy();
+  });
+
+  it('should render page header component', () => {
+    const header = fixture.debugElement.query(
+      By.css('medical-page-header')
+    );
+
+    expect(header).toBeTruthy();
   });
 });
