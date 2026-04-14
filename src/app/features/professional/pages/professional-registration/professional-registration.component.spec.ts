@@ -3,13 +3,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProfessionalRegistrationComponent } from './professional-registration.component';
 import { By } from '@angular/platform-browser';
 
-// 🔥 Stub do componente filho
+// Stub do componente filho
 @Component({
   selector: 'medical-professional-registration-form',
   standalone: true,
   template: ''
 })
 class ProfessionalRegistrationFormStubComponent {}
+
+@Component({
+  selector: 'medical-page-header',
+  standalone: true,
+  template: ''
+})
+class PageHeaderStubComponent {}
 
 describe('ProfessionalRegistrationComponent', () => {
   let component: ProfessionalRegistrationComponent;
@@ -19,10 +26,12 @@ describe('ProfessionalRegistrationComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ProfessionalRegistrationComponent]
     })
-    // 🔥 sobrescreve imports do componente
     .overrideComponent(ProfessionalRegistrationComponent, {
       set: {
-        imports: [ProfessionalRegistrationFormStubComponent]
+        imports: [
+          PageHeaderStubComponent,
+          ProfessionalRegistrationFormStubComponent
+        ]
       }
     })
     .compileComponents();
@@ -32,9 +41,6 @@ describe('ProfessionalRegistrationComponent', () => {
     fixture.detectChanges();
   });
 
-  // =========================
-  // BASICS
-  // =========================
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -48,5 +54,13 @@ describe('ProfessionalRegistrationComponent', () => {
     );
 
     expect(form).toBeTruthy();
+  });
+
+  it('should render page header component', () => {
+    const header = fixture.debugElement.query(
+      By.css('medical-page-header')
+    );
+
+    expect(header).toBeTruthy();
   });
 });
