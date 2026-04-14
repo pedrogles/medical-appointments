@@ -10,6 +10,13 @@ import { By } from '@angular/platform-browser';
 })
 class AppointmentSheduleFormStubComponent {}
 
+@Component({
+  selector: 'medical-page-header',
+  standalone: true,
+  template: ''
+})
+class PageHeaderStubComponent {}
+
 describe('AppointmentSheduleComponent', () => {
   let component: AppointmentSheduleComponent;
   let fixture: ComponentFixture<AppointmentSheduleComponent>;
@@ -18,10 +25,12 @@ describe('AppointmentSheduleComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AppointmentSheduleComponent]
     })
-    // 🔥 AQUI ESTÁ O SEGREDO
     .overrideComponent(AppointmentSheduleComponent, {
       set: {
-        imports: [AppointmentSheduleFormStubComponent]
+        imports: [
+          PageHeaderStubComponent,
+          AppointmentSheduleFormStubComponent
+        ]
       }
     })
     .compileComponents();
@@ -41,5 +50,13 @@ describe('AppointmentSheduleComponent', () => {
     );
 
     expect(form).toBeTruthy();
+  });
+
+  it('should render page header component', () => {
+    const header = fixture.debugElement.query(
+      By.css('medical-page-header')
+    );
+
+    expect(header).toBeTruthy();
   });
 });
