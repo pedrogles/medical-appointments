@@ -149,7 +149,7 @@ npm install
 
 ```
 export const environment = {
-  firebase: {
+  firebaseConfig: {
     apiKey: 'SUA_API_KEY',
     authDomain: 'SEU_DOMINIO.firebaseapp.com',
     projectId: 'SEU_PROJECT_ID',
