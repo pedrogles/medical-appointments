@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth/auth.service';
@@ -14,6 +13,8 @@ import { REGEX } from '../../../../core/constants/regex.constant';
 import { passwordMatchValidator } from '../../../../core/validators/password-match.validator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RegisterDTO } from '../../dtos/register.dto';
+import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
+import { RegisterFormType } from '../../../appointment/types/register.type';
 
 @Component({
   selector: 'medical-register',
@@ -39,17 +40,20 @@ export class RegisterComponent {
   private readonly toastService = inject(ToastService);
 
   loading = false;
-  // Inclusão do nonNullable
-  registerForm = this.formBuilder.nonNullable.group({
-    username: ['', [Validators.required, Validators.minLength(4)]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.pattern(REGEX.password)]],
-    confirmPassword: ['', [Validators.required]]
+
+  registerForm = this.formBuilder.group<RegisterFormType>({
+    username: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required, Validators.minLength(4)] }),
+    email: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required, Validators.email] }),
+    password: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required, Validators.pattern(REGEX.password)] }),
+    confirmPassword: new FormControl<string>('', 
+      { nonNullable: true, validators: [Validators.required] })
   }, { validators: passwordMatchValidator('password', 'confirmPassword') });
 
   handleRegister(): void {
     if(this.registerForm.valid) {
-      // Alteração de IUser para RegisterDTO e simplificação do getRawValue
       const { username, email, password } = this.registerForm.getRawValue();
       const user: RegisterDTO = { username, email, password };
       this.loading = true;

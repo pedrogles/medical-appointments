@@ -6,14 +6,18 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { environments } from '../environments/environments';
+import { environment } from '../environments/environment';
+import { provideNgxMask } from 'ngx-mask';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideFirebaseApp(() => initializeApp(environments.firebaseConfig)),
-    provideAuth(() => getAuth())
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideNgxMask(),
+    provideHttpClient()
   ]
 };

@@ -1,0 +1,10 @@
+@if(isMobile !== null) {
+    @if(isMobile) {
+        <medical-navbar></medical-navbar>
+    } @else {
+        <medical-sidebar></medical-sidebar>
+    }
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+}

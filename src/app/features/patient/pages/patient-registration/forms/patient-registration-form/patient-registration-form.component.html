@@ -1,0 +1,138 @@
+@if(isLoading) {
+    <mat-spinner class="spinner" diameter="20"></mat-spinner>
+} @else {
+    <form [formGroup]="patientForm" class="patient-form" (ngSubmit)="onSubmit()">
+        <fieldset>
+            <legend>Dados Pessoais</legend>
+            <div formGroupName="personalData" class="inputs">
+                <!-- Name -->
+                <mat-form-field class="form-field">
+                    <mat-label>Nome do paciente</mat-label>
+                    <input matInput formControlName="name" placeholder="Digite o nome do paciente...">
+                    <mat-error *ngIf="personalDataGroup.get('name')?.errors?.['required']">
+                        O campo nome do paciente é obrigatório.
+                    </mat-error>  
+                    <mat-error *ngIf="personalDataGroup.get('name')?.errors?.['minlength']">
+                        O nome do paciente deve ter no mínimo 6 caracteres.
+                    </mat-error>  
+                </mat-form-field>
+                <!-- Birth -->
+                <mat-form-field class="form-field">
+                    <mat-label>Data de nascimento</mat-label>
+                    <input matInput formControlName="birth" type="date">
+                    <mat-error *ngIf="personalDataGroup.get('birth')?.errors?.['required']">
+                        O campo data de nascimento é obrigatório.
+                    </mat-error>  
+                    <mat-error *ngIf="personalDataGroup.get('birth')?.errors?.['maxlength']">
+                        A data deve ter no máximo 8 caracteres.
+                    </mat-error>  
+                </mat-form-field>
+                <!-- Cpf -->
+                <mat-form-field class="form-field">
+                    <mat-label>Cpf</mat-label>
+                    <input matInput formControlName="cpf" mask="000.000.000-00" placeholder="Digite seu cpf...">
+                    <mat-error *ngIf="personalDataGroup.get('cpf')?.errors?.['required']">
+                        O campo cpf é obrigatório.
+                    </mat-error>  
+                    <mat-error *ngIf="personalDataGroup.get('cpf')?.errors?.['cpfMismatch']">
+                        O cpf informado não é válido. Verifique se digitou corretamente.
+                    </mat-error>  
+                </mat-form-field>
+                <!-- Rg -->
+                <mat-form-field class="form-field">
+                    <mat-label>Rg</mat-label>
+                    <input matInput formControlName="rg" placeholder="Digite seu rg...">
+                    <mat-error *ngIf="personalDataGroup.get('rg')?.errors?.['required']">
+                        O campo rg é obrigatório.
+                    </mat-error>  
+                    <mat-error *ngIf="personalDataGroup.get('rg')?.errors?.['pattern']">
+                        O rg informado não é válido. Verifique se digitou corretamente.
+                    </mat-error>  
+                </mat-form-field>
+                <!-- Sexo -->
+                <mat-form-field class="form-field">
+                    <mat-label>Sexo</mat-label>
+                    <mat-select formControlName="sex">
+                        @for(sex of sexOptions; track sex.value) {
+                            <mat-option [value]="sex.value">
+                                {{ sex.label }}
+                            </mat-option>
+                        }
+                    </mat-select>
+                    <mat-error *ngIf="personalDataGroup.get('sex')?.errors?.['required']">
+                        O campo sexo é obrigatório.
+                    </mat-error> 
+                </mat-form-field>
+                <!-- Phone -->
+                <mat-form-field class="form-field">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput formControlName="phone" mask="(00)00000-0000" type="tel">
+                    <mat-error *ngIf="personalDataGroup.get('phone')?.errors?.['required']">
+                        O campo telefone é obrigatório.
+                    </mat-error>  
+                    <mat-error *ngIf="personalDataGroup.get('phone')?.errors?.['minlength']">
+                        O numero informado não é válido. Verifique se digitou corretamente.
+                    </mat-error>  
+                </mat-form-field>
+                <!-- Email -->
+                <mat-form-field class="form-field">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput formControlName="email" placeholder="Digite seu e-mail...">
+                    <mat-error *ngIf="personalDataGroup.get('email')?.errors?.['required']">
+                        O campo email é obrigatório.
+                    </mat-error>  
+                    <mat-error *ngIf="personalDataGroup.get('email')?.errors?.['email']">
+                        O email informado não é válido. Verifique se digitou corretamente.
+                    </mat-error>  
+                </mat-form-field>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Endereço</legend>
+            <div formGroupName="address" class="inputs">
+                <!-- ZipCode -->
+                <mat-form-field class="form-field">
+                    <mat-label>Cep</mat-label>
+                    <input matInput formControlName="zipCode" type="number" placeholder="Digite o seu cep...">
+                    <mat-error *ngIf="addressGroup.controls['zipCode'].errors?.['required']">
+                        O campo cep é obrigatório.
+                    </mat-error>  
+                    <mat-error *ngIf="addressGroup.controls['zipCode'].errors?.['pattern']">
+                        O cep deve conter 8 digitos.
+                    </mat-error>  
+                </mat-form-field>
+                <!-- Number -->
+                <mat-form-field class="form-field">
+                    <mat-label>Número</mat-label>
+                    <input matInput formControlName="number" type="number" placeholder="Digite o número da sua casa...">
+                    <mat-error *ngIf="addressGroup.controls['number'].errors?.['required']">
+                        O campo número é obrigatório.
+                    </mat-error>  
+                </mat-form-field>
+                <!-- Street -->
+                <mat-form-field class="form-field">
+                    <mat-label>Rua</mat-label>
+                    <input matInput formControlName="street">
+                </mat-form-field>
+                <!-- District -->
+                <mat-form-field class="form-field">
+                    <mat-label>Bairro</mat-label>
+                    <input matInput formControlName="district">
+                </mat-form-field>
+                <!-- City -->
+                <mat-form-field class="form-field">
+                    <mat-label>Cidade</mat-label>
+                    <input matInput formControlName="city">
+                </mat-form-field>
+                <!-- State -->
+                <mat-form-field class="form-field">
+                    <mat-label>Estado</mat-label>
+                    <input matInput formControlName="state">
+                </mat-form-field>
+            </div>
+        </fieldset>
+        <button mat-flat-button type="submit" class="btn-submit" [disabled]="patientForm.invalid">
+            Cadastrar
+        </button>
+    </form>
+}
