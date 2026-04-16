@@ -12,7 +12,7 @@ import { finalize } from 'rxjs';
 import { ToastService } from '../../../../core/services/toast/toast.service';
 import { LoginDTO } from '../../dtos/login.dto';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
-import { LoginFormType } from '../../../appointment/types/login.type';
+import { LoginFormType } from '../../types/login.type';
 
 @Component({
   selector: 'medical-login',

@@ -14,7 +14,7 @@ import { passwordMatchValidator } from '../../../../core/validators/password-mat
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RegisterDTO } from '../../dtos/register.dto';
 import { AuthLayoutComponent } from '../../layout/auth-layout/auth-layout.component';
-import { RegisterFormType } from '../../../appointment/types/register.type';
+import { RegisterFormType } from '../../types/register.type';
 
 @Component({
   selector: 'medical-register',
