@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthService } from '../../../features/auth/service/auth/auth.service';
+import { AuthService } from '../../../features/auth/services/auth.service';
 import { MENU_ITEMS } from '../../constants/menu.constant';
 
 describe('SidebarComponent', () => {

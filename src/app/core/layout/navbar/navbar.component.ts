@@ -7,7 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { IMenuItem } from '../../interfaces/menu.interface';
 import { MENU_ITEMS } from '../../constants/menu.constant';
-import { AuthService } from '../../../features/auth/service/auth/auth.service';
+import { AuthService } from '../../../features/auth/services/auth.service';
 
 @Component({
   selector: 'medical-navbar',

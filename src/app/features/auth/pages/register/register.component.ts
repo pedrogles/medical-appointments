@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../service/auth/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { finalize, switchMap } from 'rxjs';
 import { ToastService } from '../../../../core/services/toast/toast.service';
 import { REGEX } from '../../../../core/constants/regex.constant';

@@ -6,7 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { REGEX } from '../../../../core/constants/regex.constant';
 import { finalize } from 'rxjs';
 import { ToastService } from '../../../../core/services/toast/toast.service';

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterComponent } from './register.component';
-import { AuthService } from '../../service/auth/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../../../core/services/toast/toast.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
