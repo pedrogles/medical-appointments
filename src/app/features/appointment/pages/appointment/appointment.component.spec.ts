@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppointmentSheduleComponent } from './appointment-shedule.component';
+import { AppointmentComponent } from './appointment.component';
 import { By } from '@angular/platform-browser';
 
 @Component({
-  selector: 'medical-appointment-shedule-form',
+  selector: 'medical-appointment-form',
   standalone: true,
   template: ''
 })
-class AppointmentSheduleFormStubComponent {}
+class AppointmentFormStubComponent {}
 
 @Component({
   selector: 'medical-page-header',
@@ -17,25 +17,25 @@ class AppointmentSheduleFormStubComponent {}
 })
 class PageHeaderStubComponent {}
 
-describe('AppointmentSheduleComponent', () => {
-  let component: AppointmentSheduleComponent;
-  let fixture: ComponentFixture<AppointmentSheduleComponent>;
+describe('AppointmentComponent', () => {
+  let component: AppointmentComponent;
+  let fixture: ComponentFixture<AppointmentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppointmentSheduleComponent]
+      imports: [AppointmentComponent]
     })
-    .overrideComponent(AppointmentSheduleComponent, {
+    .overrideComponent(AppointmentComponent, {
       set: {
         imports: [
           PageHeaderStubComponent,
-          AppointmentSheduleFormStubComponent
+          AppointmentFormStubComponent
         ]
       }
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AppointmentSheduleComponent);
+    fixture = TestBed.createComponent(AppointmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -46,7 +46,7 @@ describe('AppointmentSheduleComponent', () => {
 
   it('should render appointment schedule form component', () => {
     const form = fixture.debugElement.query(
-      By.css('medical-appointment-shedule-form')
+      By.css('medical-appointment-form')
     );
 
     expect(form).toBeTruthy();

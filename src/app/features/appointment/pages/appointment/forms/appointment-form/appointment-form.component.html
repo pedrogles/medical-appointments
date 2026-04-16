@@ -1,7 +1,7 @@
 @if(isLoading) {
     <mat-spinner class="spinner" diameter="20"></mat-spinner>
 } @else {
-    <form [formGroup]="appointmentForm" class="appointment-shedule-form" (ngSubmit)="openDialog()">
+    <form [formGroup]="appointmentForm" class="appointment-form" (ngSubmit)="openDialog()">
         <fieldset>
             <legend>Dados da Consulta</legend>
             <div class="inputs">

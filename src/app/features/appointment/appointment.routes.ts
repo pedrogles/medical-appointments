@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { AppointmentSheduleComponent } from "./pages/appointment-shedule/appointment-shedule.component";
+import { AppointmentComponent } from "./pages/appointment/appointment.component";
 
 
 export const APPOINTMENT_ROUTES: Routes = [
@@ -10,7 +10,7 @@ export const APPOINTMENT_ROUTES: Routes = [
     },
     { 
         path: 'novo', 
-        component: AppointmentSheduleComponent
+        component: AppointmentComponent
     },
     {
         path: '**',

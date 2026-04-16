@@ -23,7 +23,7 @@ import { AppointmentFormType } from '../../../../../../core/types/appointmentFor
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'medical-appointment-shedule-form',
+  selector: 'medical-appointment-form',
   standalone: true,
   imports: [
     FormsModule,
@@ -40,10 +40,10 @@ import { MatDialog } from '@angular/material/dialog';
     MatAutocompleteModule,
     AsyncPipe
   ],
-  templateUrl: './appointment-shedule-form.component.html',
-  styleUrl: './appointment-shedule-form.component.scss'
+  templateUrl: './appointment-form.component.html',
+  styleUrl: './appointment-form.component.scss'
 })
-export class AppointmentSheduleFormComponent implements OnInit {
+export class AppointmentFormComponent implements OnInit {
   appointmentForm!: FormGroup<AppointmentFormType>;
   isLoading = false;
 

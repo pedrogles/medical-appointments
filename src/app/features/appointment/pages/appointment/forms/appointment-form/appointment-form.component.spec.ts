@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppointmentSheduleFormComponent } from './appointment-shedule-form.component';
+import { AppointmentFormComponent } from './appointment-form.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 
@@ -12,9 +12,9 @@ import { IPatient } from '../../../../../../core/interfaces/patient.interface';
 import { IProfessional } from '../../../../../../core/interfaces/professional.interface';
 import { fakeAsync, tick } from '@angular/core/testing';
 
-describe('AppointmentSheduleFormComponent', () => {
-  let component: AppointmentSheduleFormComponent;
-  let fixture: ComponentFixture<AppointmentSheduleFormComponent>;
+describe('AppointmentFormComponent', () => {
+  let component: AppointmentFormComponent;
+  let fixture: ComponentFixture<AppointmentFormComponent>;
 
   const appointmentServiceMock = {
     create: jasmine.createSpy().and.returnValue(of({})),
@@ -79,7 +79,7 @@ describe('AppointmentSheduleFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        AppointmentSheduleFormComponent,
+        AppointmentFormComponent,
         NoopAnimationsModule
       ],
       providers: [
@@ -90,7 +90,7 @@ describe('AppointmentSheduleFormComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AppointmentSheduleFormComponent);
+    fixture = TestBed.createComponent(AppointmentFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
